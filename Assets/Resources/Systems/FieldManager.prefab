@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c63fd3ee61b0ba45ac19c81a2f973c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _notesDatas: {fileID: 11400000, guid: 4c95c65d117fb784a92405244df414cc, type: 2}
+  _fieldNotesDatas: {fileID: 11400000, guid: 4c95c65d117fb784a92405244df414cc, type: 2}
   _isDebugObjectDataPath: Test
   _playSecondTime: 30
   _postionData:
@@ -215,3 +215,8 @@ MonoBehaviour:
     - {fileID: 3062865066003264567}
     - {fileID: 7206308634640388478}
     EndPosition: {fileID: 1900614413827485038}
+  _notesJudgeDistData:
+    DeadDist: 6
+    Parfect: 1
+    Great: 2
+    Good: 3

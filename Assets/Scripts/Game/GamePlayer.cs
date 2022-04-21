@@ -11,10 +11,16 @@ public class GamePlayer : MonoBehaviour
     void Start()
     {
         _inputter.SetUp();
+        _inputter.AddPushEvent(() => Click());
     }
 
     void Update()
     {
         _inputter.UpDate();
+    }
+
+    void Click()
+    {
+        GameManager.Instance.FieldManager.JudgeNotes();
     }
 }

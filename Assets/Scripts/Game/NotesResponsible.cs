@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 // 三点の定数計算式参照 https://blog.goo.ne.jp/kano08/e/9354000c0311e9a7a0ab01cca34033a3
 
@@ -20,8 +21,7 @@ public class NotesResponsible
     class NotesData
     {
         public GameObject Target;
-        public float CurrentTimer;
-
+        
         public float constantA;
         public float constantB;
         public float constantC;
@@ -32,6 +32,20 @@ public class NotesResponsible
     FieldNotesDataBase _notesDatas;
     NotePostionMasterData _notesPosMasterData;
     string _debugNotesPath;
+
+    /// <summary> EndPositionとListの先頭ノーツの距離 </summary>
+    public float NotesDistance
+    {
+        get
+        {
+            if (_noteDatas.Count <= 0) return default;
+
+            Vector2 notePos = _noteDatas.First().Target.transform.position;
+            return Vector2.Distance(notePos, _notesPosMasterData.EndPosition.position);
+        }
+    }
+
+    const float NotesSpeed = 0.02f;
 
     /// <summary>
     /// NotesResponsibleの初期化
@@ -55,13 +69,12 @@ public class NotesResponsible
         foreach (NotesData data in _noteDatas)
         {
             data.Target.transform.position = SetPostion(data);
-            data.CurrentTimer += Time.deltaTime;
         }
     }
 
     Vector2 SetPostion(NotesData data)
     {
-        float x = data.Target.transform.position.x - 0.02f;
+        float x = data.Target.transform.position.x - NotesSpeed;
         float y = (data.constantA * x * x) + (data.constantB * x) + data.constantC;
 
         return new Vector2(x, y);
@@ -97,8 +110,7 @@ public class NotesResponsible
 
         NotesData notesData = new NotesData();
         notesData.Target = target;
-        notesData.CurrentTimer = 0;
-
+        
         notesData.constantA = ((setPosY - centerPosY) * (setPosX - endPos.x) - (setPosY - endPos.y) * (setPosX - centerPosX)) / ((setPosX - centerPosX) * (setPosX - endPos.x) * (centerPosX - endPos.x));
         notesData.constantB = (setPosY - centerPosY) / (setPosX - centerPosX) - notesData.constantA * (setPosX + centerPosX);
         notesData.constantC = setPosY - notesData.constantA * setPosX * setPosX - notesData.constantB * setPosX;

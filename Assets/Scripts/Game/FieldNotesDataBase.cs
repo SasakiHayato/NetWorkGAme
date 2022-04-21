@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Linq;
 
 /// <summary>
-/// ObjectDataの管理クラス
+/// FieldNotesDataの管理クラス
 /// </summary>
 
 [CreateAssetMenu (fileName = "FieldNotesDatas")]
