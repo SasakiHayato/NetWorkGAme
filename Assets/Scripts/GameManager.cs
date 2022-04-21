@@ -8,8 +8,14 @@ public enum GameSate : byte
     End,
 }
 
-public class GameManager : IOnEventCallback
+public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 {
+    public override void SetUp()
+    {
+        base.SetUp();
+
+    }
+
     public void OnEvent(EventData eventData)
     {
 

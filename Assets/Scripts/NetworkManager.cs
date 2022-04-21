@@ -17,6 +17,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
 
     void Awake()
     {
+        GameManager gameManager = new GameManager();
+        GameManager.SetInstance(gameManager, gameManager);
+
         _serverSettings.AppSettings.AppIdRealtime = _appID;
 
         // ƒV[ƒ“‚Ì©“®“¯Šú‚Í–³Œø‚É‚·‚é
