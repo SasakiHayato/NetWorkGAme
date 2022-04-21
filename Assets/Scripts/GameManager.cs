@@ -8,6 +8,10 @@ public enum GameSate : byte
     End,
 }
 
+/// <summary>
+/// ゲーム全体を管理するクラス
+/// </summary>
+
 public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 {
     public override void SetUp()
