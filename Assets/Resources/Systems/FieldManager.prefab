@@ -217,6 +217,10 @@ MonoBehaviour:
     EndPosition: {fileID: 1900614413827485038}
   _notesJudgeDistData:
     DeadDist: 6
-    Parfect: 1
-    Great: 2
-    Good: 3
+    Datas:
+    - Path: 0
+      Dist: 1
+    - Path: 1
+      Dist: 2
+    - Path: 2
+      Dist: 3

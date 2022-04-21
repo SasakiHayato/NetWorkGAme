@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// ノーツの判定を管理するクラス
@@ -6,17 +8,29 @@ using UnityEngine;
 
 public class NotesJudgement
 {
-    [System.Serializable]
+    /// <summary>
+    /// 判定データ
+    /// </summary>
+    [Serializable]
     public class NotesJudgeDistData
     {
+        [Serializable]
+        public class Data
+        {
+            public ScoreType Path;
+            public float Dist;
+        }
+
         public float DeadDist;
-        public float Parfect;
-        public float Great;
-        public float Good;
+        public List<Data> Datas = new List<Data>();
     }
 
     NotesJudgeDistData _distData;
 
+    /// <summary>
+    /// NotesJudgementの初期化
+    /// </summary>
+    /// <param name="distData">NotesJudgeDistData</param>
     public NotesJudgement(NotesJudgeDistData distData)
     {
         _distData = distData;
@@ -26,27 +40,15 @@ public class NotesJudgement
     {
         if (_distData.DeadDist < noteDist) return;
 
-        if (_distData.Parfect > noteDist)
+        foreach (NotesJudgeDistData.Data data in _distData.Datas)
         {
-            Debug.Log("Parfect");
-        }
-        else
-        {
-            if (_distData.Great > noteDist)
+            if (data.Dist > noteDist)
             {
-                Debug.Log("Great");
-            }
-            else
-            {
-                if (_distData.Good > noteDist)
-                {
-                    Debug.Log("Good");
-                }
-                else
-                {
-                    Debug.Log("Miss");
-                }
+                GameManager.Instance.ScoreManager.Add(data.Path);
+                return;
             }
         }
+
+        GameManager.Instance.ScoreManager.Add(ScoreType.Miss);
     }
 }

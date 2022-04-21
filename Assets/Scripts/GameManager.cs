@@ -20,6 +20,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     public void SetGameState(GameSate gameSate) => CurrentGameState = gameSate;
 
     public FieldManager FieldManager { get; private set; }
+    public ScoreManager ScoreManager { get; private set; }
 
     public override void SetUp()
     {
@@ -50,8 +51,11 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
     void GameSetUp()
     {
-        GameObject obj = Object.Instantiate((GameObject)Resources.Load("Systems/FieldManager"));
-        FieldManager = obj.GetComponent<FieldManager>();
+        GameObject fieldManager = Object.Instantiate((GameObject)Resources.Load("Systems/FieldManager"));
+        FieldManager = fieldManager.GetComponent<FieldManager>();
+
+        GameObject scoreManager = Object.Instantiate((GameObject)Resources.Load("Systems/ScoreManager"));
+        ScoreManager = scoreManager.GetComponent<ScoreManager>();
     }
 
     void GameEnd()
