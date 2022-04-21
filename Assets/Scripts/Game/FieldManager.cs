@@ -6,28 +6,21 @@ using UnityEngine;
 
 public class FieldManager : MonoBehaviour
 {
-    [SerializeField] ObjectDataBase _objectData;
+    [SerializeField] FieldNotesDataBase _notesDatas;
     [SerializeField] string _isDebugObjectDataPath;
     [SerializeField] float _playSecondTime;
+    [SerializeField] NotesResponsible.NotePostionMasterData _postionData;
+
+    NotesResponsible _notesResponsible;
 
     void Start()
     {
-        SetObject();
+        _notesResponsible = new NotesResponsible(_notesDatas, _postionData, _isDebugObjectDataPath);
+        _notesResponsible.Create();
     }
 
-    void SetObject()
+    void Update()
     {
-        ObjectData objectData = null;
-
-        if (_isDebugObjectDataPath != "")
-        {
-            objectData = _objectData.GetData(_isDebugObjectDataPath);
-        }
-
-        GameObject obj = new GameObject($"{objectData.Path}");
-        SpriteRenderer spriteRenderer = obj.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = objectData.Sprite;
-
-        obj.transform.position = Vector2.zero;
+        _notesResponsible.NotesUpDate();
     }
 }

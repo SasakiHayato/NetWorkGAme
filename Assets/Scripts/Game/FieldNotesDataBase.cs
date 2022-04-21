@@ -6,23 +6,24 @@ using System.Linq;
 /// ObjectData‚ÌŠÇ—ƒNƒ‰ƒX
 /// </summary>
 
-[CreateAssetMenu (fileName = "ObjectDatas")]
-public class ObjectDataBase : ScriptableObject
+[CreateAssetMenu (fileName = "FieldNotesDatas")]
+public class FieldNotesDataBase : ScriptableObject
 {
     public enum ObjectType
     {
         BreakTarget,
         Obstacle,
+        Item,
     }
 
-    [SerializeField] List<ObjectData> ObjectDatas = new List<ObjectData>();
+    [SerializeField] List<FieldNotesData> ObjectDatas = new List<FieldNotesData>();
 
     /// <summary>
     /// ObjectData‚ğPath‚Å’T‚·
     /// </summary>
     /// <param name="path">stringŒ^</param>
     /// <returns>ObjectData</returns>
-    public ObjectData GetData(string path)
+    public FieldNotesData GetData(string path)
     {
         return ObjectDatas.FirstOrDefault(o => o.Path == path);
     }
@@ -32,16 +33,16 @@ public class ObjectDataBase : ScriptableObject
     /// </summary>
     /// <param name="id">intŒ^</param>
     /// <returns>ObjectData</returns>
-    public ObjectData GetData(int id) => ObjectDatas[id];
+    public FieldNotesData GetData(int id) => ObjectDatas[id];
 }
 
 /// <summary>
 /// ˆê‚Â‚ÌObjectData
 /// </summary>
 [System.Serializable]
-public class ObjectData
+public class FieldNotesData
 {
     public string Path;
-    public ObjectDataBase.ObjectType ObjectType;
+    public FieldNotesDataBase.ObjectType ObjectType;
     public Sprite Sprite;
 }
