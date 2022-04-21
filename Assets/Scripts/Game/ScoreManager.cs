@@ -37,5 +37,7 @@ public class ScoreManager : MonoBehaviour
     {
         ScoreData data = _scoreDatas.First(s => s.ScoreType == type);
         CurrentScore += data.Score;
+
+        BaseUI.Instance.CallBack("Game", "Score", new object[] { CurrentScore });
     }
 }

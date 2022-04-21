@@ -28,6 +28,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
         CurrentGameState = GameSate.Title;
         FieldManager = null;
+        ScoreManager = null;
     }
 
     public void OnEvent(EventData eventData)

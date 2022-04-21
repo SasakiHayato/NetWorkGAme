@@ -15,10 +15,7 @@ public class BaseUI : SingletonAttribute<BaseUI>
     public override void SetUp()
     {
         base.SetUp();
-    }
 
-    public void Load()
-    {
         ParentUI[] parents = GameObject.Find(CanvasName).GetComponentsInChildren<ParentUI>();
 
         int id = 0;
