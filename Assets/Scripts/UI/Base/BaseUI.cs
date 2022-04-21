@@ -9,7 +9,7 @@ using System.Linq;
 
 public class BaseUI : SingletonAttribute<BaseUI>
 {
-    const string CanvasName = "Canvas";
+    const string CanvasName = "BaseCanvas";
     List<ParentUI> _uiList;
 
     public override void SetUp()

@@ -2315,7 +2315,7 @@ namespace Photon.Pun
                 EventData evData = new EventData { Code = eventCode };  // creates the equivalent of a received event
                 evData.Parameters[ParameterCode.Data] = eventContent;
                 evData.Parameters[ParameterCode.ActorNr] = 1;
-
+                
                 NetworkingClient.OnEvent(evData);
                 return true;
             }

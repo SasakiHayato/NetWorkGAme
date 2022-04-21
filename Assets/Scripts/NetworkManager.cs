@@ -11,6 +11,8 @@ using Photon.Realtime;
 public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚ÌƒNƒ‰ƒX‚ğŒp³‚·‚é
 {
     [SerializeField] ServerSettings _serverSettings;
+    [SerializeField] bool _isDebug = false;
+    [SerializeField] GameSate _gameSate;
 
     const string AppIDPun = "58643798-9f22-492d-b25c-6c16c89461bb";
 
@@ -27,8 +29,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
 
     void Start()
     {
-        // Photon ‚ÉÚ‘±‚·‚é
-        Connect("1.0"); // 1.0 ‚Íƒo[ƒWƒ‡ƒ“”Ô†i“¯‚¶ƒo[ƒWƒ‡ƒ“‚ğw’è‚µ‚½ƒNƒ‰ƒCƒAƒ“ƒg“¯m‚ªÚ‘±‚Å‚«‚éj
+        if (_isDebug)
+        {
+            IsDebug();
+        }
+        else
+        {
+            // Photon ‚ÉÚ‘±‚·‚é
+            Connect("1.0"); // 1.0 ‚Íƒo[ƒWƒ‡ƒ“”Ô†i“¯‚¶ƒo[ƒWƒ‡ƒ“‚ğw’è‚µ‚½ƒNƒ‰ƒCƒAƒ“ƒg“¯m‚ªÚ‘±‚Å‚«‚éj
+        }
+    }
+
+    void IsDebug()
+    {
+        GameManager.Instance.SetGameState(_gameSate);
+        EventData eventData = new EventData();
+        eventData.Code = (byte)GameManager.Instance.CurrentGameState;
+        GameManager.Instance.OnEvent(eventData);
     }
 
     /// <summary>
