@@ -38,6 +38,8 @@ public class ScoreManager : MonoBehaviour
         ScoreData data = _scoreDatas.First(s => s.ScoreType == type);
         CurrentScore += data.Score;
 
+        if (CurrentScore < 0) CurrentScore = 0;
+
         BaseUI.Instance.CallBack("Game", "Score", new object[] { CurrentScore });
     }
 }

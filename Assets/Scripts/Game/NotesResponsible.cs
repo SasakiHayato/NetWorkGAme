@@ -27,9 +27,9 @@ public class NotesResponsible
         public float constantC;
     }
 
-    List<NotesData> _noteDatas;
+    List<NotesData> _notesDatas;
 
-    FieldNotesDataBase _notesDatas;
+    FieldNotesDataBase _fieldNotesDatas;
     NotePostionMasterData _notesPosMasterData;
     string _debugNotesPath;
 
@@ -38,9 +38,9 @@ public class NotesResponsible
     {
         get
         {
-            if (_noteDatas.Count <= 0) return default;
+            if (_notesDatas.Count <= 0) return default;
 
-            Vector2 notePos = _noteDatas.First().Target.transform.position;
+            Vector2 notePos = _notesDatas.First().Target.transform.position;
             return Vector2.Distance(notePos, _notesPosMasterData.EndPosition.position);
         }
     }
@@ -55,18 +55,18 @@ public class NotesResponsible
     /// <param name="debugPath">デバッグ用のNotesPath</param>
     public NotesResponsible(FieldNotesDataBase dataBase, NotePostionMasterData postionData, string debugPath)
     {
-        _notesDatas = dataBase;
+        _fieldNotesDatas = dataBase;
         _notesPosMasterData = postionData;
         _debugNotesPath = debugPath;
 
-        _noteDatas = new List<NotesData>();
+        _notesDatas = new List<NotesData>();
     }
 
     public void NotesUpDate()
     {
-        if (_noteDatas.Count <= 0) return;
+        if (_notesDatas.Count <= 0) return;
 
-        foreach (NotesData data in _noteDatas)
+        foreach (NotesData data in _notesDatas)
         {
             data.Target.transform.position = SetPostion(data);
         }
@@ -80,13 +80,16 @@ public class NotesResponsible
         return new Vector2(x, y);
     }
 
+    /// <summary>
+    /// ノーツの生成
+    /// </summary>
     public void Create()
     {
         FieldNotesData notesData = null;
 
         if (_debugNotesPath != "")
         {
-            notesData = _notesDatas.GetData(_debugNotesPath);
+            notesData = _fieldNotesDatas.GetData(_debugNotesPath);
         }
 
         GameObject obj = new GameObject($"{notesData.Path}");
@@ -94,6 +97,17 @@ public class NotesResponsible
         spriteRenderer.sprite = notesData.Sprite;
 
         SetNotesData(obj);
+    }
+
+    /// <summary>
+    /// ノーツの削除
+    /// </summary>
+    public void Delete()
+    {
+        if (_notesDatas.Count <= 0) return;
+
+        Object.Destroy(_notesDatas.First().Target);
+        _notesDatas.Remove(_notesDatas.First());
     }
 
     void SetNotesData(GameObject target)
@@ -115,6 +129,6 @@ public class NotesResponsible
         notesData.constantB = (setPosY - centerPosY) / (setPosX - centerPosX) - notesData.constantA * (setPosX + centerPosX);
         notesData.constantC = setPosY - notesData.constantA * setPosX * setPosX - notesData.constantB * setPosX;
 
-        _noteDatas.Add(notesData);
+        _notesDatas.Add(notesData);
     }
 }

@@ -48,7 +48,7 @@ public class NotesJudgement
                 return;
             }
         }
-
+        
         GameManager.Instance.ScoreManager.Add(ScoreType.Miss);
     }
 }

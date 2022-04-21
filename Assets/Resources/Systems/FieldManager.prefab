@@ -216,7 +216,7 @@ MonoBehaviour:
     - {fileID: 7206308634640388478}
     EndPosition: {fileID: 1900614413827485038}
   _notesJudgeDistData:
-    DeadDist: 6
+    DeadDist: 4.2
     Datas:
     - Path: 0
       Dist: 1
