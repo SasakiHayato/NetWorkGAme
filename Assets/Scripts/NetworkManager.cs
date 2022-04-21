@@ -12,15 +12,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
 {
     [SerializeField] ServerSettings _serverSettings;
 
-    // Note. AppID_Pun
-    const string _appID = "58643798-9f22-492d-b25c-6c16c89461bb";
+    const string AppIDPun = "58643798-9f22-492d-b25c-6c16c89461bb";
 
     void Awake()
     {
         GameManager gameManager = new GameManager();
         GameManager.SetInstance(gameManager, gameManager);
 
-        _serverSettings.AppSettings.AppIdRealtime = _appID;
+        _serverSettings.AppSettings.AppIdRealtime = AppIDPun;
 
         // ƒV[ƒ“‚Ì©“®“¯Šú‚Í–³Œø‚É‚·‚é
         PhotonNetwork.AutomaticallySyncScene = false;
