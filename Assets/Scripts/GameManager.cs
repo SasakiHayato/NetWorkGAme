@@ -74,6 +74,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
                 break;
             case (byte)GameSate.InGame:
                 SoundsManager.Request("InGameBGM");
+                SoundsManager.Request("CountDownStart");
                 InGameSetUp();
 
                 break;

@@ -37,6 +37,9 @@ public class GamePresenter : MonoBehaviour
         GameManager.Instance.OnEvent(eventData);
     }
 
+    /// <summary>
+    /// ゲーム開始のカウントダウンをさせる
+    /// </summary>
     public void CountDown()
     {
         StartCoroutine(ICounDown());
@@ -46,11 +49,22 @@ public class GamePresenter : MonoBehaviour
     {
         bool endCount = false;
         float timer = 0;
+        int saveTime = int.MinValue;
 
         while (!endCount)
         {
             timer += Time.deltaTime;
             if (timer > _countTime) endCount = true;
+            else
+            {
+                if ((int)timer != saveTime)
+                {
+                    saveTime = (int)timer;
+                    GameManager.Instance.SoundsManager.Request("CountDown");
+                    string data = (_countTime - saveTime).ToString();
+                    BaseUI.Instance.CallBack("Game", "CountDown", new object[] { data, false });
+                }
+            }
 
             yield return null;
         }
@@ -58,5 +72,7 @@ public class GamePresenter : MonoBehaviour
         EventData eventData = new EventData();
         eventData.Code = (byte)GameSate.InGame;
         GameManager.Instance.OnEvent(eventData);
+
+        BaseUI.Instance.CallBack("Game", "CountDown", new object[] { "Go!!", true });
     }
 }
