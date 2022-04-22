@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 // Photon —p‚Ì–¼‘O‹óŠÔ‚ðŽQÆ‚·‚é
 using ExitGames.Client.Photon;
 
@@ -9,6 +10,7 @@ using ExitGames.Client.Photon;
 public class GamePresenter : MonoBehaviour
 {
     [SerializeField] GameSate _gameSate;
+    [SerializeField] int _countTime;
     [SerializeField] bool _isDebug;
 
     void Awake()
@@ -32,6 +34,29 @@ public class GamePresenter : MonoBehaviour
         GameManager.Instance.SetGameState(_gameSate);
         EventData eventData = new EventData();
         eventData.Code = (byte)GameManager.Instance.CurrentGameState;
+        GameManager.Instance.OnEvent(eventData);
+    }
+
+    public void CountDown()
+    {
+        StartCoroutine(ICounDown());
+    }
+
+    IEnumerator ICounDown()
+    {
+        bool endCount = false;
+        float timer = 0;
+
+        while (!endCount)
+        {
+            timer += Time.deltaTime;
+            if (timer > _countTime) endCount = true;
+
+            yield return null;
+        }
+
+        EventData eventData = new EventData();
+        eventData.Code = (byte)GameSate.InGame;
         GameManager.Instance.OnEvent(eventData);
     }
 }

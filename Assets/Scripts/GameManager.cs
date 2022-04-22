@@ -6,6 +6,7 @@ using Photon.Realtime;
 public enum GameSate : byte
 {
     Start,
+    InGame,
     End,
     Title,
 }
@@ -16,14 +17,16 @@ public enum GameSate : byte
 
 public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 {
+    Fader _fader;
+
     public GameSate CurrentGameState { get; private set; }
     public void SetGameState(GameSate gameSate) => CurrentGameState = gameSate;
 
     public FieldManager FieldManager { get; private set; }
     public ScoreManager ScoreManager { get; private set; }
     public SoundsManager SoundsManager { get; private set; }
-
-    public Fader Fader { get; private set; }
+    public NetworkManager NetworkManager { get; private set; }
+    public GamePresenter GamePresenter { get; private set; }
 
     public bool IsDebug { get; set; }
 
@@ -38,18 +41,30 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         GameObject soundManager = Object.Instantiate((GameObject)Resources.Load("Systems/SoundsManager"));
         SoundsManager = soundManager.GetComponent<SoundsManager>();
 
-        Fader = new Fader();
-        Fader.SetFade(Fader.FadeType.In);
+        _fader = new Fader();
+        _fader.SetFade(Fader.FadeType.In);
+
+        NetworkManager = Object.FindObjectOfType<NetworkManager>();
+        GamePresenter = Object.FindObjectOfType<GamePresenter>();
     }
 
     public void OnEvent(EventData eventData)
     {
+        CurrentGameState = (GameSate)eventData.Code;
+
         switch (eventData.Code)
         {
             case (byte)GameSate.Start:
-                GameSetUp();
+                BaseUI.Instance.ParentActive("Game", true);
+                BaseUI.Instance.ParentActive("Title", false);
+                _fader.SetFade(Fader.FadeType.In, GamePresenter.CountDown);
 
                 break;
+            case (byte)GameSate.InGame:
+                InGameSetUp();
+
+                break;
+
             case (byte)GameSate.End:
                 GameEnd();
 
@@ -61,7 +76,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         }
     }
 
-    void GameSetUp()
+    void InGameSetUp()
     {
         GameObject fieldManager = Object.Instantiate((GameObject)Resources.Load("Systems/FieldManager"));
         FieldManager = fieldManager.GetComponent<FieldManager>();

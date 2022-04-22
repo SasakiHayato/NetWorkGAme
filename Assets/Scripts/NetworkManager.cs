@@ -13,6 +13,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
     [SerializeField] ServerSettings _serverSettings;
     
     const string AppIDPun = "58643798-9f22-492d-b25c-6c16c89461bb";
+    const string VersionNum = "1.0";
 
     void Awake()
     {
@@ -27,16 +28,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
         if (!GameManager.Instance.IsDebug)
         {
             // Photon ‚ÉÚ‘±‚·‚é
-            Connect("1.0"); // 1.0 ‚Íƒo[ƒWƒ‡ƒ“”Ô†i“¯‚¶ƒo[ƒWƒ‡ƒ“‚ğw’è‚µ‚½ƒNƒ‰ƒCƒAƒ“ƒg“¯m‚ªÚ‘±‚Å‚«‚éj
+            Connect(VersionNum); // 1.0 ‚Íƒo[ƒWƒ‡ƒ“”Ô†i“¯‚¶ƒo[ƒWƒ‡ƒ“‚ğw’è‚µ‚½ƒNƒ‰ƒCƒAƒ“ƒg“¯m‚ªÚ‘±‚Å‚«‚éj
         }
     }
-
-    
 
     /// <summary>
     /// Photon‚ÉÚ‘±‚·‚é
     /// </summary>
-    void Connect(string gameVersion)
+    public void Connect(string gameVersion = VersionNum)
     {
         if (PhotonNetwork.IsConnected == false)
         {

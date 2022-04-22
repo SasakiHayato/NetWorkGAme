@@ -21,7 +21,7 @@ public class GamePlayer : MonoBehaviour
 
     void Click()
     {
-        if (GameManager.Instance.CurrentGameState != GameSate.Start) return;
+        if (GameManager.Instance.CurrentGameState != GameSate.InGame) return;
 
         GameManager.Instance.FieldManager.JudgeNotes();
     }

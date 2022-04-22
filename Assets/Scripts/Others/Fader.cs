@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 /// <summary>
 /// フェードの管理クラス
@@ -52,15 +53,28 @@ public class Fader
         rect.offsetMax = Vector2.zero;
     }
 
-    public void SetFade(FadeType type)
+    public void SetFade(FadeType type, Action action = null)
     {
+        Color color = _fadeImage.color;
+
         if (type == FadeType.In)
         {
-            _fadeImage.DOFade(0, DurationTime);
+            color.a = 1;
+            _fadeImage.color = color;
+            _fadeImage.DOFade(0, DurationTime)
+                .OnComplete(() => action?.Invoke());
         }
         else
         {
-            _fadeImage.DOFade(1, DurationTime);
+            color.a = 0;
+            _fadeImage.color = color;
+            _fadeImage.DOFade(1, DurationTime)
+            .OnComplete(() => action?.Invoke());
         }
+    }
+
+    public void SetFade(Action action)
+    {
+        action.Invoke();
     }
 }
