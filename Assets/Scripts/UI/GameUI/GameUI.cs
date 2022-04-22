@@ -9,7 +9,7 @@ public class GameUI : ParentUI
     {
         base.SetUp();
 
-        if (GameManager.Instance.CurrentGameState != GameSate.Start)
+        if (GameManager.Instance.CurrentGameState != GameSate.InGame)
         {
             Active(false);
         }
@@ -17,6 +17,7 @@ public class GameUI : ParentUI
 
     public override void CallBack(object[] datas)
     {
-        
+        BaseUI.Instance.CallBack(Path, "Score", new object[] { 0 });
+        BaseUI.Instance.CallBack(Path, "Timer", new object[] { 0 });
     }
 }

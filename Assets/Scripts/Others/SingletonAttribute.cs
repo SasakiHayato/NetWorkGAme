@@ -6,7 +6,7 @@
 
 public class SingletonAttribute<Singleton> where Singleton : class
 {
-    Singleton _sigleton = default;
+    Singleton _sigleton = null;
     public static Singleton Instance => s_instance._sigleton;
 
     private static SingletonAttribute<Singleton> s_instance = null;

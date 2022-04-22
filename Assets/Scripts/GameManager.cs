@@ -65,8 +65,8 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         switch (eventData.Code)
         {
             case (byte)GameSate.Start:
-                BaseUI.Instance.ParentActive("Game", true);
-                BaseUI.Instance.ParentActive("Title", false);
+                BaseUI.Instance.AtParantActive("Game");
+                
                 _fader.SetFade(Fader.FadeType.In, GamePresenter.CountDown);
 
                 break;
@@ -76,11 +76,15 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
                 break;
 
             case (byte)GameSate.End:
+                BaseUI.Instance.AtParantActive("Result");
+                BaseUI.Instance.CallBackParent("Title");
+                BaseUI.Instance.CallBackParent("Game");
                 GameEnd();
 
                 break;
 
             case (byte)GameSate.Title:
+                BaseUI.Instance.AtParantActive("Title");
 
                 break;
         }
@@ -103,6 +107,8 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     {
         RemoveManager("FieldManager");
         RemoveManager("ScoreManager");
+
+
     }
 
     void RemoveManager(string path)

@@ -36,8 +36,16 @@ public abstract class ParentUI : MonoBehaviour
 
     public void Active(bool active)
     {
-        if (active) CanvasGroup.alpha = 1;
-        else CanvasGroup.alpha = 0;
+        if (active)
+        {
+            CanvasGroup.alpha = 1;
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            CanvasGroup.alpha = 0;
+            gameObject.SetActive(false);
+        }
     }
 
     public abstract void CallBack(object[] datas);

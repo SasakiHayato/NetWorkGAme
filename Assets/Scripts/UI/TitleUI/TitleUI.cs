@@ -17,6 +17,7 @@ public class TitleUI : ParentUI
 
     public override void CallBack(object[] datas)
     {
-        
+        BaseUI.Instance.CallBack(Path, "StartPanel", new object[] { false });
+        BaseUI.Instance.CallBack(Path, "OptionPanel", new object[] { false });
     }
 }

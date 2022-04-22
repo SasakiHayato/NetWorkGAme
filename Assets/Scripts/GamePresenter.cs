@@ -23,10 +23,10 @@ public class GamePresenter : MonoBehaviour
 
     void Start()
     {
-        if (_isDebug) IsDebug();
-
         BaseUI baseUI = new BaseUI();
         BaseUI.SetInstance(baseUI, baseUI);
+
+        if (_isDebug) IsDebug();
     }
 
     void IsDebug()

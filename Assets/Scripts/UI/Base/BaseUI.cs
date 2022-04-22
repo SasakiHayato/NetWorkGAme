@@ -77,4 +77,22 @@ public class BaseUI : SingletonAttribute<BaseUI>
     {
         _uiList.First(u => u.Path == path).Active(active);
     }
+
+    public void AtParentActive(int id)
+    {
+        foreach (ParentUI ui in _uiList)
+        {
+            if (ui.ID == id) ui.Active(true);
+            else ui.Active(false);
+        }
+    }
+
+    public void AtParantActive(string path)
+    {
+        foreach (ParentUI ui in _uiList)
+        {
+            if (ui.Path == path) ui.Active(true);
+            else ui.Active(false);
+        }
+    }
 }
