@@ -22,13 +22,14 @@ public class NotesResponsible
     public class NotesProbabilityData
     {
         public int Seed;
-        public ProbabilityData[] _datas;
+        public ProbabilityData[] Datas;
 
         [System.Serializable]
         public class ProbabilityData
         {
             public FieldNotesDataBase.ObjectType ObjectType;
-            public float Pacent;
+            public int MinPacent;
+            public int MaxParcent;
         }
     }
 
@@ -112,7 +113,7 @@ public class NotesResponsible
     /// </summary>
     public void Create()
     {
-        FieldNotesData notesData = null;
+        FieldNotesData notesData;
 
         if (DebugNotesPath != "")
         {
@@ -120,8 +121,9 @@ public class NotesResponsible
         }
         else
         {
-            int pacent = (int)Random.value * 100;
-
+            float pacent = Random.value * 100;
+            notesData = GetProbabilityData((int)pacent);
+            Debug.Log(notesData.Path);
         }
 
         GameObject obj = new GameObject($"{notesData.Path}");
@@ -129,6 +131,20 @@ public class NotesResponsible
         spriteRenderer.sprite = notesData.Sprite;
 
         SetNotesData(obj);
+    }
+
+    FieldNotesData GetProbabilityData(int parcent)
+    {
+        foreach (NotesProbabilityData.ProbabilityData data in _notesProbabilityData.Datas)
+        {
+            if (data.MinPacent <= parcent && data.MaxParcent >= parcent)
+            {
+                return _fieldNotesDatas.GetData(data.ObjectType);
+            }
+                
+        }
+
+        return null;
     }
 
     /// <summary>

@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fieldNotesDatas: {fileID: 11400000, guid: 4c95c65d117fb784a92405244df414cc, type: 2}
-  _isDebugObjectDataPath: Arrow
+  _isDebugObjectDataPath: 
   _playSecondTime: 30
   _postionData:
     SetPoitions:
@@ -216,14 +216,17 @@ MonoBehaviour:
     - {fileID: 7206308634640388478}
     EndPosition: {fileID: 1900614413827485038}
   _probabilityData:
-    Seed: 70
-    _datas:
+    Seed: 159
+    Datas:
     - ObjectType: 0
-      Pacent: 70
+      MinPacent: 0
+      MaxParcent: 65
     - ObjectType: 1
-      Pacent: 20
+      MinPacent: 66
+      MaxParcent: 85
     - ObjectType: 2
-      Pacent: 10
+      MinPacent: 86
+      MaxParcent: 100
   _notesJudgeDistData:
     DeadDist: 3
     Datas:

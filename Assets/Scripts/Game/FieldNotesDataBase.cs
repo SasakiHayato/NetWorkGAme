@@ -34,6 +34,19 @@ public class FieldNotesDataBase : ScriptableObject
     /// <param name="id">intŒ^</param>
     /// <returns>ObjectData</returns>
     public FieldNotesData GetData(int id) => ObjectDatas[id];
+
+    /// <summary>
+    /// ObjectData‚ðObjectType‚Å’T‚·
+    /// </summary>
+    /// <param name="type">ObjectType</param>
+    /// <returns>ObjectData</returns>
+    public FieldNotesData GetData(ObjectType type)
+    {
+        var data = ObjectDatas.Where(o => o.ObjectType == type);
+        int random = Random.Range(0, data.Count());
+
+        return data.ElementAt(random);
+    }
 }
 
 /// <summary>
