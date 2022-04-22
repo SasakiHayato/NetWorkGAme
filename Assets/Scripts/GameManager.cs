@@ -23,6 +23,8 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     public ScoreManager ScoreManager { get; private set; }
     public SoundsManager SoundsManager { get; private set; }
 
+    public bool IsDebug { get; set; }
+
     public override void SetUp()
     {
         base.SetUp();
