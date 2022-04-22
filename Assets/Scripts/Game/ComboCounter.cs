@@ -32,16 +32,18 @@ public class ComboCounter
             _addEffectCount = 0;
         }
 
-        SetSE();
+        SetEffect();
         BaseUI.Instance.CallBack("Game", "Combo", new object[] { CurrentCount });
     }
 
-    void SetSE()
+    void SetEffect()
     {
         if (_comboEffectCount <= _addEffectCount)
         {
             _addEffectCount = 0;
             GameManager.Instance.SoundsManager.Request("Blessing");
+            BaseUI.Instance.CallBack("Game", "Blessing");
+
         }
     }
 }
