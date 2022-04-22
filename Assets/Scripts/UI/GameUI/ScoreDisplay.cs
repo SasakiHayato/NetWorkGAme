@@ -13,11 +13,12 @@ public class ScoreDisplay : ChildrenUI
     public override void SetUp()
     {
         _scoreTxt = GetComponent<Text>();
-        _scoreTxt.text = Display;
+        _scoreTxt.text = Display + "00000000000";
     }
 
     public override void CallBack(object[] datas = null)
     {
-        _scoreTxt.text = Display + datas[0].ToString();
+        int score = (int)datas[0];
+        _scoreTxt.text = Display + score.ToString("00000000000");
     }
 }
