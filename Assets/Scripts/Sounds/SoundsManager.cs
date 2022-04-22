@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// SoundëSëÃÇÃä«óùÉNÉâÉX
+/// </summary>
+
 public class SoundsManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] SoundDataBase _soundDataBase;
+    [SerializeField] SoundEffect _soundPrefab;
+    
+    ObjectPool<SoundEffect> _soundEffect;
+
     void Start()
     {
-        
+        _soundEffect = new ObjectPool<SoundEffect>();
+        _soundEffect.SetUp(_soundPrefab);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Request(string path)
     {
-        
+        SoundDataBase.SoundData soundData = _soundDataBase.GetData(path);
+        _soundEffect.Respons().SetData(soundData);
     }
 }
