@@ -21,6 +21,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
     public FieldManager FieldManager { get; private set; }
     public ScoreManager ScoreManager { get; private set; }
+    public SoundsManager SoundsManager { get; private set; }
 
     public override void SetUp()
     {
@@ -29,6 +30,9 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         CurrentGameState = GameSate.Title;
         FieldManager = null;
         ScoreManager = null;
+
+        GameObject soundManager = Object.Instantiate((GameObject)Resources.Load("Systems/SoundsManager"));
+        SoundsManager = soundManager.GetComponent<SoundsManager>();
     }
 
     public void OnEvent(EventData eventData)

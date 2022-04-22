@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,9 +18,9 @@ public class SoundEffect : MonoBehaviour, IPool
 
     void Update()
     {
-        if (!IsUse) return;
+        if (!IsUse || _source == null) return;
 
-
+        if (!_source.isPlaying) Delete();
     }
 
     public void SetData(SoundDataBase.SoundData soundData)
@@ -32,10 +30,13 @@ public class SoundEffect : MonoBehaviour, IPool
 
         if (soundData.SoundType == SoundType.BGM) _source.loop = true;
         else _source.loop = false;
+
+        _source.Play();
     }
 
     public void Delete()
     {
-
+        IsUse = false;
+        _source = null;
     }
 }
