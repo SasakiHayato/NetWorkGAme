@@ -641,7 +641,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 221807013}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3177864586523814022, guid: 126296181745c9046a993d5a749ab2ef, type: 3}
+        m_TargetAssemblyTypeName: SoundSetter, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &221807013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,7 +1111,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 490453302}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3177864586523814022, guid: 126296181745c9046a993d5a749ab2ef, type: 3}
+        m_TargetAssemblyTypeName: SoundSetter, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &490453302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,7 +1493,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 766563735}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3177864586523814022, guid: 126296181745c9046a993d5a749ab2ef, type: 3}
+        m_TargetAssemblyTypeName: SoundSetter, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &766563735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1537,7 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a1d626eb373f746bb05de365b91a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameSate: 0
+  _gameSate: 3
   _countTime: 3
   _isDebug: 1
 --- !u!4 &779667626
@@ -1573,7 +1609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &917509121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1877,7 +1913,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1185426269}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3177864586523814022, guid: 126296181745c9046a993d5a749ab2ef, type: 3}
+        m_TargetAssemblyTypeName: SoundSetter, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1185426269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2153,7 +2201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1519958567
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2688,7 +2736,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1911420607}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3177864586523814022, guid: 126296181745c9046a993d5a749ab2ef, type: 3}
+        m_TargetAssemblyTypeName: SoundSetter, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1911420607
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,6 +48,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
         GameObject soundManager = Object.Instantiate((GameObject)Resources.Load("Systems/SoundsManager"));
         SoundsManager = soundManager.GetComponent<SoundsManager>();
+        SoundsManager.SetUp();
 
         _fader = new Fader();
         _fader.SetFade(Fader.FadeType.In);

@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: SoundDatas
   m_EditorClassIdentifier: 
   _soundDatas:
-  - Path: 
+  - Path: Click
+    SoundType: 1
+    AudioClip: {fileID: 8300000, guid: 9eaadecdf3cb2c54e8d1e0fbf869c3d7, type: 3}
+    Volume: 0.5
+  - Path: TitleBGM
     SoundType: 0
-    AudioClip: {fileID: 0}
-    Volume: 0
+    AudioClip: {fileID: 8300000, guid: b897c0b53a33d3942bcfd7d9835706a6, type: 3}
+    Volume: 0.25

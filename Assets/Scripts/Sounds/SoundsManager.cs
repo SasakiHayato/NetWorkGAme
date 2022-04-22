@@ -15,19 +15,14 @@ public class SoundsManager : MonoBehaviour
     [SerializeField, Range(0, 1)] float _seVolume;
 
     public float MasterVoume => _mastarVolume;
-    public float BGMVolume => _bgmVolume;
-    public float SEVolume => _seVolume;
+    public float BGMVolume { get => _bgmVolume; set { _bgmVolume = value; } }
+    public float SEVolume { get => _seVolume; set { _seVolume = value; } }
 
     bool _isSetUp = false;
 
     ObjectPool<SoundEffect> _soundEffect;
 
-    void Start()
-    {
-        SetUp();
-    }
-
-    void SetUp()
+    public void SetUp()
     {
         if (_isSetUp) return;
 
@@ -39,16 +34,12 @@ public class SoundsManager : MonoBehaviour
 
     public void Request(string path)
     {
-        SetUp();
-
         SoundDataBase.SoundData soundData = _soundDataBase.GetData(path);
         _soundEffect.Respons().SetData(soundData);
     }
 
     public void Request(int id)
     {
-        SetUp();
-
         SoundDataBase.SoundData soundData = _soundDataBase.GetData(id);
         _soundEffect.Respons().SetData(soundData);
     }
