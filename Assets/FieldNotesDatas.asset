@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: FieldNotesDatas
   m_EditorClassIdentifier: 
   ObjectDatas:
-  - Path: Test
+  - Path: Arrow
     ObjectType: 0
-    Sprite: {fileID: 21300000, guid: f00feafcf0675cd47a48f83ae42b06d4, type: 3}
+    Sprite: {fileID: 21300000, guid: f05530560effdc24da2c8fc9de3a6c3c, type: 3}
+  - Path: Bard
+    ObjectType: 1
+    Sprite: {fileID: 21300000, guid: f1dde78d4f8e4954f9905cc1d60e123a, type: 3}

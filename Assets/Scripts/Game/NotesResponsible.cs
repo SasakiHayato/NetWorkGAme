@@ -11,11 +11,25 @@ using System.Linq;
 public class NotesResponsible
 {
     [System.Serializable]
-    public class NotePostionMasterData
+    public class NotesPostionMasterData
     {
         public Transform[] SetPoitions;
         public Transform[] CenterPostions;
         public Transform EndPosition;
+    }
+
+    [System.Serializable]
+    public class NotesProbabilityData
+    {
+        public int Seed;
+        public ProbabilityData[] _datas;
+
+        [System.Serializable]
+        public class ProbabilityData
+        {
+            public FieldNotesDataBase.ObjectType ObjectType;
+            public float Pacent;
+        }
     }
 
     public class NotesData
@@ -30,8 +44,10 @@ public class NotesResponsible
     List<NotesData> _notesDatas;
 
     FieldNotesDataBase _fieldNotesDatas;
-    NotePostionMasterData _notesPosMasterData;
-    string _debugNotesPath;
+    NotesPostionMasterData _notesPosMasterData;
+    NotesProbabilityData _notesProbabilityData;
+    
+    public string DebugNotesPath { get; set; }
 
     /// <summary> EndPositionとListの先頭ノーツの距離 </summary>
     public float NotesDistance
@@ -61,15 +77,16 @@ public class NotesResponsible
     /// NotesResponsibleの初期化
     /// </summary>
     /// <param name="dataBase">FieldNotesDataBase</param>
-    /// <param name="postionData">NotePostionData</param>
-    /// <param name="debugPath">デバッグ用のNotesPath</param>
-    public NotesResponsible(FieldNotesDataBase dataBase, NotePostionMasterData postionData, string debugPath)
+    /// <param name="pos">NotePostionData</param>
+    /// <param name="pro">デバッグ用のNotesPath</param>
+    public NotesResponsible(FieldNotesDataBase dataBase, NotesPostionMasterData pos, NotesProbabilityData pro)
     {
         _fieldNotesDatas = dataBase;
-        _notesPosMasterData = postionData;
-        _debugNotesPath = debugPath;
-
+        _notesPosMasterData = pos;
+        _notesProbabilityData = pro;
+        
         _notesDatas = new List<NotesData>();
+        Random.InitState(pro.Seed);
     }
 
     public void NotesUpDate()
@@ -97,9 +114,14 @@ public class NotesResponsible
     {
         FieldNotesData notesData = null;
 
-        if (_debugNotesPath != "")
+        if (DebugNotesPath != "")
         {
-            notesData = _fieldNotesDatas.GetData(_debugNotesPath);
+            notesData = _fieldNotesDatas.GetData(DebugNotesPath);
+        }
+        else
+        {
+            int pacent = (int)Random.value * 100;
+
         }
 
         GameObject obj = new GameObject($"{notesData.Path}");

@@ -11,8 +11,10 @@ public class FieldManager : MonoBehaviour, IManager
     [SerializeField] FieldNotesDataBase _fieldNotesDatas;
     [SerializeField] string _isDebugObjectDataPath;
     [SerializeField] float _playSecondTime;
-    [SerializeField] NotesResponsible.NotePostionMasterData _postionData;
+    [SerializeField] NotesResponsible.NotesPostionMasterData _postionData;
+    [SerializeField] NotesResponsible.NotesProbabilityData _probabilityData;
     [SerializeField] NotesJudgement.NotesJudgeDistData _notesJudgeDistData;
+    
 
     float _createTimer;
     float _gameTimer;
@@ -22,7 +24,9 @@ public class FieldManager : MonoBehaviour, IManager
 
     void Start()
     {
-        _notesResponsible = new NotesResponsible(_fieldNotesDatas, _postionData, _isDebugObjectDataPath);
+        _notesResponsible = new NotesResponsible(_fieldNotesDatas, _postionData, _probabilityData);
+        _notesResponsible.DebugNotesPath = _isDebugObjectDataPath;
+
         _notesJudgement = new NotesJudgement(_notesJudgeDistData, _notesResponsible);
 
         _createTimer = 0;

@@ -3587,7 +3587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -373, y: 228}
+  m_AnchoredPosition: {x: -370, y: 130}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1850396786
@@ -3603,6 +3603,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: Judge
+  _parent: {fileID: 917509121}
+  _judgeTextPool: {fileID: 8881108735782109775, guid: 01c73e942926e6347b2b66acf686812b, type: 3}
 --- !u!114 &1850396787
 MonoBehaviour:
   m_ObjectHideFlags: 0
