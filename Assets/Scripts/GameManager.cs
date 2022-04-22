@@ -85,6 +85,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
             case (byte)GameSate.Title:
                 BaseUI.Instance.AtParantActive("Title");
+                SoundsManager.Request("TitleBGM");
 
                 break;
         }

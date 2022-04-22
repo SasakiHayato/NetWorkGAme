@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafb7828f17dde745ab6948ed618f960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleButton: {fileID: 0}
+  _titleButton: {fileID: 1184043}
 --- !u!1 &155702357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,7 +1537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a1d626eb373f746bb05de365b91a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameSate: 3
+  _gameSate: 0
   _countTime: 3
   _isDebug: 1
 --- !u!4 &779667626
