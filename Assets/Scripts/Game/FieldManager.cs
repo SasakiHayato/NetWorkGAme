@@ -20,7 +20,7 @@ public class FieldManager : MonoBehaviour
     void Start()
     {
         _notesResponsible = new NotesResponsible(_fieldNotesDatas, _postionData, _isDebugObjectDataPath);
-        _notesJudgement = new NotesJudgement(_notesJudgeDistData);
+        _notesJudgement = new NotesJudgement(_notesJudgeDistData, _notesResponsible);
 
         _timer = 0;
     }
@@ -29,6 +29,9 @@ public class FieldManager : MonoBehaviour
     {
         CreateNote();
         _notesResponsible.NotesUpDate();
+
+        if (_notesJudgement.UpDateJudge()) _notesResponsible.Delete();
+
     }
 
     void CreateNote()
@@ -45,10 +48,7 @@ public class FieldManager : MonoBehaviour
     public void JudgeNotes()
     {
         if (_notesResponsible.NotesDistance == default) return;
-
-        bool isJudge;
-        _notesJudgement.Judge(_notesResponsible.NotesDistance, out isJudge);
         
-        if (isJudge) _notesResponsible.Delete();
+        if (_notesJudgement.ClickJudge()) _notesResponsible.Delete();
     }
 }

@@ -18,7 +18,7 @@ public class NotesResponsible
         public Transform EndPosition;
     }
 
-    class NotesData
+    public class NotesData
     {
         public GameObject Target;
         
@@ -42,6 +42,16 @@ public class NotesResponsible
 
             Vector2 notePos = _notesDatas.First().Target.transform.position;
             return Vector2.Distance(notePos, _notesPosMasterData.EndPosition.position);
+        }
+    }
+
+    public Vector2 EndPostion => _notesPosMasterData.EndPosition.position;
+    public NotesData FirstNoteData
+    {
+        get
+        {
+            if (_notesDatas.Count <= 0) return null;
+            else return _notesDatas.First();
         }
     }
 
