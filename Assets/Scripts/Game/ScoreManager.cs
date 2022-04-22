@@ -15,7 +15,7 @@ public enum ScoreType
 /// スコアの管理クラス
 /// </summary>
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour, IManager
 {
     [System.Serializable]
     public class ScoreData
@@ -42,4 +42,8 @@ public class ScoreManager : MonoBehaviour
 
         BaseUI.Instance.CallBack("Game", "Score", new object[] { CurrentScore });
     }
+
+    // IManager
+    public Object ManagerObject() => gameObject;
+    public string ManagerPath() => GetType().Name;
 }

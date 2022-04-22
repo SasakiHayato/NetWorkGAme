@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 // Photon 用の名前空間を参照する
 using ExitGames.Client.Photon;
 using Photon.Realtime;
@@ -11,12 +12,19 @@ public enum GameSate : byte
     Title,
 }
 
+public interface IManager
+{
+    Object ManagerObject();
+    string ManagerPath();
+}
+
 /// <summary>
 /// ゲーム全体を管理するクラス
 /// </summary>
 
 public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 {
+    List<IManager> _iManagerList;
     Fader _fader;
 
     public GameSate CurrentGameState { get; private set; }
@@ -46,6 +54,8 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
         NetworkManager = Object.FindObjectOfType<NetworkManager>();
         GamePresenter = Object.FindObjectOfType<GamePresenter>();
+
+        _iManagerList = new List<IManager>();
     }
 
     public void OnEvent(EventData eventData)
@@ -81,12 +91,24 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         GameObject fieldManager = Object.Instantiate((GameObject)Resources.Load("Systems/FieldManager"));
         FieldManager = fieldManager.GetComponent<FieldManager>();
 
+        _iManagerList.Add(FieldManager);
+
         GameObject scoreManager = Object.Instantiate((GameObject)Resources.Load("Systems/ScoreManager"));
         ScoreManager = scoreManager.GetComponent<ScoreManager>();
+
+        _iManagerList.Add(ScoreManager);
     }
 
     void GameEnd()
     {
+        RemoveManager("FieldManager");
+        RemoveManager("ScoreManager");
+    }
 
+    void RemoveManager(string path)
+    {
+        IManager manager = _iManagerList.Find(m => m.ManagerPath() == path);
+        _iManagerList.Remove(manager);
+        Object.Destroy(manager.ManagerObject());
     }
 }
