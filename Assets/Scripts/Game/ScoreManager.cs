@@ -45,6 +45,7 @@ public class ScoreManager : MonoBehaviour, IManager
         if (CurrentScore < 0) CurrentScore = 0;
 
         BaseUI.Instance.CallBack("Game", "Score", new object[] { CurrentScore });
+        BaseUI.Instance.CallBack("Game", "Judge", new object[] { type.ToString() });
 
         _comboCounter.Check(type);
     }
