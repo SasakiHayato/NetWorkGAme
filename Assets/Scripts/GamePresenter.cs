@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 // Photon 用の名前空間を参照する
 using ExitGames.Client.Photon;
+
+/// <summary>
+/// シーン再生時のSetUpクラス
+/// </summary>
 
 public class GamePresenter : MonoBehaviour
 {
