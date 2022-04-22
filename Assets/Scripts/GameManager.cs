@@ -23,6 +23,8 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     public ScoreManager ScoreManager { get; private set; }
     public SoundsManager SoundsManager { get; private set; }
 
+    public Fader Fader { get; private set; }
+
     public bool IsDebug { get; set; }
 
     public override void SetUp()
@@ -35,6 +37,9 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
         GameObject soundManager = Object.Instantiate((GameObject)Resources.Load("Systems/SoundsManager"));
         SoundsManager = soundManager.GetComponent<SoundsManager>();
+
+        Fader = new Fader();
+        Fader.SetFade(Fader.FadeType.In);
     }
 
     public void OnEvent(EventData eventData)
