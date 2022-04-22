@@ -9,10 +9,10 @@ public class TitleUI : ParentUI
     {
         base.SetUp();
 
-        //if (GameManager.Instance.CurrentGameState != GameSate.Title)
-        //{
-        //    Active(false);
-        //}
+        if (GameManager.Instance.CurrentGameState != GameSate.Title)
+        {
+            Active(false);
+        }
     }
 
     public override void CallBack(object[] datas)

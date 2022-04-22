@@ -16,15 +16,15 @@ public class GamePresenter : MonoBehaviour
         GameManager gameManager = new GameManager();
         GameManager.SetInstance(gameManager, gameManager);
 
-        BaseUI baseUI = new BaseUI();
-        BaseUI.SetInstance(baseUI, baseUI);
-
         GameManager.Instance.IsDebug = _isDebug;
     }
 
     void Start()
     {
         if (_isDebug) IsDebug();
+
+        BaseUI baseUI = new BaseUI();
+        BaseUI.SetInstance(baseUI, baseUI);
     }
 
     void IsDebug()
