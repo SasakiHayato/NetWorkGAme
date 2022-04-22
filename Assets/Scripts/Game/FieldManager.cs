@@ -45,8 +45,10 @@ public class FieldManager : MonoBehaviour
     public void JudgeNotes()
     {
         if (_notesResponsible.NotesDistance == default) return;
-       
-        _notesJudgement.Judge(_notesResponsible.NotesDistance);
-        _notesResponsible.Delete();
+
+        bool isJudge;
+        _notesJudgement.Judge(_notesResponsible.NotesDistance, out isJudge);
+        
+        if (isJudge) _notesResponsible.Delete();
     }
 }

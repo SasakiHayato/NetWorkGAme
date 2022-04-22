@@ -36,9 +36,15 @@ public class NotesJudgement
         _distData = distData;
     }
 
-    public void Judge(float noteDist)
+    public void Judge(float noteDist, out bool isJudge)
     {
-        if (_distData.DeadDist < noteDist) return;
+        if (_distData.DeadDist < noteDist)
+        {
+            isJudge = false;
+            return;
+        }
+
+        isJudge = true;
 
         foreach (NotesJudgeDistData.Data data in _distData.Datas)
         {
