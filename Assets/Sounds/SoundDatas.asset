@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: SoundDatas
   m_EditorClassIdentifier: 
   _soundDatas:
-  - Path: Click
-    SoundType: 1
-    AudioClip: {fileID: 8300000, guid: 9eaadecdf3cb2c54e8d1e0fbf869c3d7, type: 3}
-    Volume: 0.5
   - Path: TitleBGM
     SoundType: 0
     AudioClip: {fileID: 8300000, guid: b897c0b53a33d3942bcfd7d9835706a6, type: 3}
@@ -24,4 +20,16 @@ MonoBehaviour:
   - Path: InGameBGM
     SoundType: 0
     AudioClip: {fileID: 8300000, guid: c69fc6c722f4d1c4f8542ff60cde18a8, type: 3}
+    Volume: 0.25
+  - Path: Click
+    SoundType: 1
+    AudioClip: {fileID: 8300000, guid: 9eaadecdf3cb2c54e8d1e0fbf869c3d7, type: 3}
+    Volume: 0.5
+  - Path: PlayerTap
+    SoundType: 1
+    AudioClip: {fileID: 8300000, guid: ee9c50469bff3cd4baf07b689fc83a06, type: 3}
+    Volume: 0.281
+  - Path: Blessing
+    SoundType: 1
+    AudioClip: {fileID: 8300000, guid: e91336b29745d984c8102a1cba625878, type: 3}
     Volume: 0.25

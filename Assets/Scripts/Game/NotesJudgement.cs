@@ -79,6 +79,7 @@ public class NotesJudgement
         {
             if (data.Dist > _notesResponsible.NotesDistance)
             {
+
                 GameManager.Instance.ScoreManager.Add(data.Path);
                 return true;
             }

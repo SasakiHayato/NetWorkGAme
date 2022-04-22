@@ -24,13 +24,17 @@ public class ScoreManager : MonoBehaviour, IManager
         public int Score;
     }
 
+    [SerializeField] int _comboEffectCount;
     [SerializeField] List<ScoreData> _scoreDatas = new List<ScoreData>();
+
+    ComboCounter _comboCounter;
 
     public int CurrentScore { get; private set; }
 
     void Start()
     {
         CurrentScore = 0;
+        _comboCounter = new ComboCounter(_comboEffectCount);
     }
 
     public void Add(ScoreType type)
@@ -41,6 +45,8 @@ public class ScoreManager : MonoBehaviour, IManager
         if (CurrentScore < 0) CurrentScore = 0;
 
         BaseUI.Instance.CallBack("Game", "Score", new object[] { CurrentScore });
+
+        _comboCounter.Check(type);
     }
 
     // IManager

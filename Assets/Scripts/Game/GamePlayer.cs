@@ -23,6 +23,7 @@ public class GamePlayer : MonoBehaviour
     {
         if (GameManager.Instance.CurrentGameState != GameSate.InGame) return;
 
+        GameManager.Instance.SoundsManager.Request("PlayerTap");
         GameManager.Instance.FieldManager.JudgeNotes();
     }
 }
