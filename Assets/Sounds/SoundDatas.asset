@@ -21,3 +21,7 @@ MonoBehaviour:
     SoundType: 0
     AudioClip: {fileID: 8300000, guid: b897c0b53a33d3942bcfd7d9835706a6, type: 3}
     Volume: 0.25
+  - Path: InGameBGM
+    SoundType: 0
+    AudioClip: {fileID: 8300000, guid: c69fc6c722f4d1c4f8542ff60cde18a8, type: 3}
+    Volume: 0.25

@@ -21,6 +21,7 @@ public class SoundsManager : MonoBehaviour
     bool _isSetUp = false;
 
     ObjectPool<SoundEffect> _soundEffect;
+    SoundEffect _bgmEffect = null;
 
     public void SetUp()
     {
@@ -35,12 +36,39 @@ public class SoundsManager : MonoBehaviour
     public void Request(string path)
     {
         SoundDataBase.SoundData soundData = _soundDataBase.GetData(path);
-        _soundEffect.Respons().SetData(soundData);
+        SoundSet(soundData);
     }
 
     public void Request(int id)
     {
         SoundDataBase.SoundData soundData = _soundDataBase.GetData(id);
-        _soundEffect.Respons().SetData(soundData);
+        SoundSet(soundData);
+    }
+
+    public void StopBGM()
+    {
+        if (_bgmEffect == null) return;
+
+        _bgmEffect.Delete();
+    }
+
+    void SoundSet(SoundDataBase.SoundData soundData)
+    {
+        SoundEffect soundEffect = _soundEffect.Respons();
+
+        if (soundData.SoundType == SoundType.BGM)
+        {
+            if (_bgmEffect == null)
+            {
+                _bgmEffect = soundEffect;
+            }
+            else
+            {
+                _bgmEffect.Delete();
+                _bgmEffect = soundEffect;
+            }
+        }
+
+        soundEffect.SetData(soundData);
     }
 }

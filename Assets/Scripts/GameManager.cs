@@ -67,11 +67,13 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         {
             case (byte)GameSate.Start:
                 BaseUI.Instance.AtParantActive("Game");
+                SoundsManager.StopBGM();
                 
                 _fader.SetFade(Fader.FadeType.In, GamePresenter.CountDown);
 
                 break;
             case (byte)GameSate.InGame:
+                SoundsManager.Request("InGameBGM");
                 InGameSetUp();
 
                 break;
