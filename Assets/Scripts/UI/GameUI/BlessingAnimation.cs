@@ -21,11 +21,14 @@ public class BlessingAnimation : ChildrenUI
     public override void CallBack(object[] datas = null)
     {
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(
-            _blessinPrefab.transform.DOMove(_setPosition, Duration)
-            .SetEase(Ease.OutElastic))
-            .Append(
-            _blessinPrefab.transform.DOMove(_offSetPosition, Duration)
+        sequence.Append
+            (
+                _blessinPrefab.transform.DOMove(_setPosition, Duration)
+                .SetEase(Ease.OutElastic)
+            )
+            .Append
+            (
+                _blessinPrefab.transform.DOMove(_offSetPosition, Duration)
             );
     }
 }

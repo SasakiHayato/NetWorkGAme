@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditDatas:
   - SoundPath: 
-    DataPath: {fileID: 0}
+    DataPath: {fileID: 4900000, guid: 928358ed3448e1a41be8a5e8813d6876, type: 3}

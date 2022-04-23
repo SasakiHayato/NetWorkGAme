@@ -35,6 +35,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     public SoundsManager SoundsManager { get; private set; }
     public NetworkManager NetworkManager { get; private set; }
     public GamePresenter GamePresenter { get; private set; }
+    public ResultData ResultData { get; private set; }
 
     public bool IsDebug { get; set; }
 
@@ -51,7 +52,6 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         SoundsManager.SetUp();
 
         _fader = new Fader();
-        _fader.SetFade(Fader.FadeType.In);
 
         NetworkManager = Object.FindObjectOfType<NetworkManager>();
         GamePresenter = Object.FindObjectOfType<GamePresenter>();
@@ -62,15 +62,15 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     public void OnEvent(EventData eventData)
     {
         CurrentGameState = (GameSate)eventData.Code;
-
+        
         switch (eventData.Code)
         {
             case (byte)GameSate.Start:
-                BaseUI.Instance.AtParantActive("Game");
                 SoundsManager.StopBGM();
-                
-                _fader.SetFade(Fader.FadeType.In, GamePresenter.CountDown);
 
+                _fader.Slide(() => BaseUI.Instance.AtParantActive("Game"), Fader.ActionTiming.Center)
+                    .AddEndFadeEvent(GamePresenter.CountDown);
+                
                 break;
             case (byte)GameSate.InGame:
                 SoundsManager.Request("InGameBGM");
@@ -80,9 +80,11 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
                 break;
 
             case (byte)GameSate.End:
-                BaseUI.Instance.AtParantActive("Result");
+                _fader.Slide(() => BaseUI.Instance.AtParantActive("Result"), Fader.ActionTiming.Center);
+                
                 BaseUI.Instance.CallBackParent("Title");
                 BaseUI.Instance.CallBackParent("Game");
+
                 GameEnd();
 
                 break;
@@ -90,6 +92,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
             case (byte)GameSate.Title:
                 BaseUI.Instance.AtParantActive("Title");
                 SoundsManager.Request("TitleBGM");
+                RemoveManager("ResultData");
 
                 break;
         }
@@ -110,16 +113,24 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
     void GameEnd()
     {
+        GameObject resultData = Object.Instantiate((GameObject)Resources.Load("Systems/ResultData"));
+        ResultData = resultData.GetComponent<ResultData>();
+        ResultData.SetData();
+
+        _iManagerList.Add(ResultData);
+
         RemoveManager("FieldManager");
         RemoveManager("ScoreManager");
-
-
     }
 
     void RemoveManager(string path)
     {
         IManager manager = _iManagerList.Find(m => m.ManagerPath() == path);
-        _iManagerList.Remove(manager);
-        Object.Destroy(manager.ManagerObject());
+
+        if (manager != null)
+        {
+            _iManagerList.Remove(manager);
+            Object.Destroy(manager.ManagerObject());
+        }
     }
 }

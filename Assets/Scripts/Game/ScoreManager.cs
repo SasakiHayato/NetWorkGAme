@@ -30,6 +30,7 @@ public class ScoreManager : MonoBehaviour, IManager
     ComboCounter _comboCounter;
 
     public int CurrentScore { get; private set; }
+    public int CurrentComboCount => _comboCounter.CurrentCount;
 
     void Start()
     {
