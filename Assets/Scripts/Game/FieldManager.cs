@@ -10,7 +10,7 @@ public class FieldManager : MonoBehaviour, IManager
 {
     [SerializeField] FieldNotesDataBase _fieldNotesDatas;
     [SerializeField] string _isDebugObjectDataPath;
-    [SerializeField] float _playSecondTime;
+    [SerializeField] int _playSecondTime;
     [SerializeField] NotesResponsible.NotesPostionMasterData _postionData;
     [SerializeField] NotesResponsible.NotesProbabilityData _probabilityData;
     [SerializeField] NotesJudgement.NotesJudgeDistData _notesJudgeDistData;
@@ -45,7 +45,7 @@ public class FieldManager : MonoBehaviour, IManager
     void GameTime()
     {
         _gameTimer += Time.deltaTime;
-        BaseUI.Instance.CallBack("Game", "Timer", new object[] { (int)_gameTimer });
+        BaseUI.Instance.CallBack("Game", "Timer", new object[] { _playSecondTime - (int)_gameTimer });
 
         if (_gameTimer > _playSecondTime)
         {

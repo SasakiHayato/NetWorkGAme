@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fieldNotesDatas: {fileID: 11400000, guid: 4c95c65d117fb784a92405244df414cc, type: 2}
   _isDebugObjectDataPath: 
-  _playSecondTime: 30
+  _playSecondTime: 60
   _postionData:
     SetPoitions:
     - {fileID: 5274649454524512545}

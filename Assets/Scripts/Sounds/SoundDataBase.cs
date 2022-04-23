@@ -6,6 +6,7 @@ public enum SoundType
 {
     BGM,
     SE,
+    Music,
 }
 /// <summary>
 /// Soundのデータベース

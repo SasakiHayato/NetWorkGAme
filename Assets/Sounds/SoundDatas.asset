@@ -33,3 +33,11 @@ MonoBehaviour:
     SoundType: 1
     AudioClip: {fileID: 8300000, guid: e91336b29745d984c8102a1cba625878, type: 3}
     Volume: 0.25
+  - Path: CountDown
+    SoundType: 1
+    AudioClip: {fileID: 8300000, guid: a8faec9573c632d409d143aa5459d863, type: 3}
+    Volume: 0.25
+  - Path: CountDownStart
+    SoundType: 1
+    AudioClip: {fileID: 8300000, guid: 8195dd8745c0ef640ae6face47bca23c, type: 3}
+    Volume: 0.541
