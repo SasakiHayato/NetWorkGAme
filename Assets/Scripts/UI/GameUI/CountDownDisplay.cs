@@ -9,6 +9,7 @@ using DG.Tweening;
 public class CountDownDisplay : ChildrenUI
 {
     [SerializeField] Vector2 _setScale;
+    [SerializeField] string _startText;
 
     Text _countDouwnTxt;
     RectTransform _rect;
@@ -25,6 +26,8 @@ public class CountDownDisplay : ChildrenUI
 
     public override void CallBack(object[] datas = null)
     {
+        if ((string)datas[0] == "") datas[0] = _startText;
+
         _countDouwnTxt.text = (string)datas[0];
         bool isEnd = (bool)datas[1];
 

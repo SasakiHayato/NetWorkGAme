@@ -9,6 +9,7 @@ public enum GameSate : byte
     Start,
     InGame,
     End,
+    Result,
     Title,
 }
 
@@ -80,8 +81,12 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
                 break;
 
             case (byte)GameSate.End:
+                BaseUI.Instance.CallBack("Game", "EndGameButton");
+
+                break;
+            case (byte)GameSate.Result:
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Result"), Fader.ActionTiming.Center);
-                
+
                 BaseUI.Instance.CallBackParent("Title");
                 BaseUI.Instance.CallBackParent("Game");
 

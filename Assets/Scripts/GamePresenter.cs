@@ -73,6 +73,6 @@ public class GamePresenter : MonoBehaviour
         eventData.Code = (byte)GameSate.InGame;
         GameManager.Instance.OnEvent(eventData);
 
-        BaseUI.Instance.CallBack("Game", "CountDown", new object[] { "Go!!", true });
+        BaseUI.Instance.CallBack("Game", "CountDown", new object[] { "", true });
     }
 }
