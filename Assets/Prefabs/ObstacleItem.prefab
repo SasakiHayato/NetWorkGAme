@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obstacleSprite: {fileID: 21300000, guid: fc15d7dfa2a197043b054004319f4d23, type: 3}
-  _createCount: 1
+  _createCount: 12
+  _moveDuration: 2
   _obstacleData:
     SetMinPositionX: 2
-    SetMaxPositionX: 10
+    SetMaxPositionX: 15
     SetPositionY: 7.5
-    ObstacleAngle: 135
+    ObstacleAngle: 40
+    MoveDalayMinTime: 0
+    MoveDalayMaxTime: 2
+    MoveDistance: 25

@@ -128,7 +128,6 @@ public class NotesResponsible
         {
             float pacent = Random.value * 100;
             notesData = GetProbabilityData((int)pacent);
-            Debug.Log(notesData.Path);
         }
 
         GameObject obj = new GameObject($"{notesData.Path}");
