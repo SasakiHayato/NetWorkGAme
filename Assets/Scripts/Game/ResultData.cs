@@ -1,4 +1,8 @@
 using UnityEngine;
+// Photon 用の名前空間を参照する
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 
 /// <summary>
 /// UnGame終了時のData管理クラス
@@ -20,6 +24,7 @@ public class ResultData : MonoBehaviour, IManager
     }
 
     // IManager
-    public Object ManagerObject() => gameObject;
+    public PhotonView ManagerPhotonView { get; set; }
+    public GameObject ManagerObject() => gameObject;
     public string ManagerPath() => GetType().Name;
 }

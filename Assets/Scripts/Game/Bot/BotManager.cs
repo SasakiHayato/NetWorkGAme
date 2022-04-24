@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+// Photon 用の名前空間を参照する
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 
 /// <summary>
 /// Botの管理クラス
@@ -81,6 +85,6 @@ public class BotManager : MonoBehaviour, IManager
     }
 
     // IManager
-    public Object ManagerObject() => gameObject;
+    public GameObject ManagerObject() => gameObject;
     public string ManagerPath() => GetType().Name;
 }

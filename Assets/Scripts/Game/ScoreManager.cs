@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+// Photon —p‚Ì–¼‘O‹óŠÔ‚ðŽQÆ‚·‚é
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 
 public enum ScoreType
 {
@@ -52,6 +56,7 @@ public class ScoreManager : MonoBehaviour, IManager
     }
 
     // IManager
-    public Object ManagerObject() => gameObject;
+    public PhotonView ManagerPhotonView { get; set; }
+    public GameObject ManagerObject() => gameObject;
     public string ManagerPath() => GetType().Name;
 }

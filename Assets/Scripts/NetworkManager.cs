@@ -5,6 +5,11 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 
+public interface INetworkManager
+{
+    PhotonView ManagerPhotonView { get; set; }
+}
+
 /// <summary>
 /// Photon.Pun.UtilityScripts.PunTurnManager ‚ğg‚Á‚½ turn-based ‚ÈƒQ[ƒ€‚ğ‰Šú‰»‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
 /// </summary>
@@ -12,14 +17,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
 {
     [SerializeField] ServerSettings _serverSettings;
     
-    MultiManager _multiManager;
+    public MultiManager MultiManager { get; private set; }
 
     const string AppIDPun = "58643798-9f22-492d-b25c-6c16c89461bb";
     const string VersionNum = "1.0"; // 1.0 ‚Íƒo[ƒWƒ‡ƒ“”Ô†i“¯‚¶ƒo[ƒWƒ‡ƒ“‚ğw’è‚µ‚½ƒNƒ‰ƒCƒAƒ“ƒg“¯m‚ªÚ‘±‚Å‚«‚éj
 
     void Awake()
     {
-        _multiManager = GetComponent<MultiManager>();
+        MultiManager = GetComponent<MultiManager>();
         _serverSettings.AppSettings.AppIdRealtime = AppIDPun;
 
         // ƒV[ƒ“‚Ì©“®“¯Šú‚Í–³Œø‚É‚·‚é
@@ -141,7 +146,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
     /// <summary>•”‰®‚É“üº‚µ‚½</summary>
     public override void OnJoinedRoom()
     {
-        _multiManager.SetUp();
+        MultiManager.SetUp();
         Debug.Log("OnJoinedRoom");
     }
 
@@ -167,7 +172,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
     /// <summary>©•ª‚Ì‚¢‚é•”‰®‚É‘¼‚ÌƒvƒŒƒCƒ„[‚ª“üº‚µ‚Ä‚«‚½</summary>
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        _multiManager.CheckPlayerCount();
+        MultiManager.CheckPlayerCount();
 
         Debug.Log("OnPlayerEnteredRoom: " + newPlayer.NickName);
     }
@@ -175,7 +180,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
     /// <summary>©•ª‚Ì‚¢‚é•”‰®‚©‚ç‘¼‚ÌƒvƒŒƒCƒ„[‚ª‘Şº‚µ‚½</summary>
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        _multiManager.LeftCurrentRoom();
+        MultiManager.LeftCurrentRoom();
 
         Debug.Log("OnPlayerLeftRoom: " + otherPlayer.NickName);
     }

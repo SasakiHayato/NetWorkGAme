@@ -22,7 +22,7 @@ public enum GameType
 
 public interface IManager
 {
-    Object ManagerObject();
+    GameObject ManagerObject();
     string ManagerPath();
 }
 
@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public bool IsDebug { get; set; }
     public bool IsUsingBot { get; private set; }
 
+    int _viewID = 2;
+
     void Awake()
     {
         if (s_instance == null) s_instance = this;
@@ -64,14 +66,14 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         FieldManager = null;
         ScoreManager = null;
 
-        GameObject soundManager = Object.Instantiate((GameObject)Resources.Load("Systems/SoundsManager"));
+        GameObject soundManager = Instantiate((GameObject)Resources.Load("Systems/SoundsManager"));
         SoundsManager = soundManager.GetComponent<SoundsManager>();
         SoundsManager.SetUp();
 
         _fader = new Fader();
 
-        NetworkManager = Object.FindObjectOfType<NetworkManager>();
-        GamePresenter = Object.FindObjectOfType<GamePresenter>();
+        NetworkManager = FindObjectOfType<NetworkManager>();
+        GamePresenter = FindObjectOfType<GamePresenter>();
 
         _iManagerList = new List<IManager>();
     }
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 {
                     IsUsingBot = true;
 
-                    GameObject botManager = Object.Instantiate((GameObject)Resources.Load("Systems/BotManager"));
+                    GameObject botManager = Instantiate((GameObject)Resources.Load("Systems/BotManager"));
                     BotManager = botManager.GetComponent<BotManager>();
 
                     _iManagerList.Add(BotManager);
@@ -139,21 +141,42 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 break;
         }
+
+        AddPhotonView();
+    }
+
+    void AddPhotonView()
+    {
+        if (CurrentGameType != GameType.Multi || _iManagerList.Count <= 0) return;
+
+        foreach (IManager iManager in _iManagerList)
+        {
+            INetworkManager network = iManager.ManagerObject().GetComponent<INetworkManager>();
+            if (network == null) continue;
+
+            if (network.ManagerPhotonView == null)
+            {
+                network.ManagerPhotonView = iManager.ManagerObject().AddComponent<PhotonView>();
+                network.ManagerPhotonView.ViewID = _viewID;
+
+                _viewID++;
+            }
+        }
     }
 
     void InGameSetUp()
     {
-        GameObject fieldManager = Object.Instantiate((GameObject)Resources.Load("Systems/FieldManager"));
+        GameObject fieldManager = Instantiate((GameObject)Resources.Load("Systems/FieldManager"));
         FieldManager = fieldManager.GetComponent<FieldManager>();
 
         _iManagerList.Add(FieldManager);
 
-        GameObject scoreManager = Object.Instantiate((GameObject)Resources.Load("Systems/ScoreManager"));
+        GameObject scoreManager = Instantiate((GameObject)Resources.Load("Systems/ScoreManager"));
         ScoreManager = scoreManager.GetComponent<ScoreManager>();
 
         _iManagerList.Add(ScoreManager);
 
-        GameObject itemManager = Object.Instantiate((GameObject)Resources.Load("Systems/ItemManager"));
+        GameObject itemManager = Instantiate((GameObject)Resources.Load("Systems/ItemManager"));
         ItemManager = itemManager.GetComponent<ItemManager>();
 
         _iManagerList.Add(ItemManager);
@@ -161,7 +184,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     void GameEnd()
     {
-        GameObject resultData = Object.Instantiate((GameObject)Resources.Load("Systems/ResultData"));
+        GameObject resultData = Instantiate((GameObject)Resources.Load("Systems/ResultData"));
         ResultData = resultData.GetComponent<ResultData>();
         _iManagerList.Add(ResultData);
 
