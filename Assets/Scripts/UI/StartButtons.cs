@@ -44,5 +44,6 @@ public class StartButtons : MonoBehaviour
     {
         GameManager.Instance.SetGameType(GameType.Multi);
         GameManager.Instance.NetworkManager.Connect();
+        BaseUI.Instance.ParentActive("Matching", true);
     }
 }

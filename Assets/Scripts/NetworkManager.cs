@@ -153,7 +153,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
     /// <summary>©•ª‚Ì‚¢‚é•”‰®‚É‘¼‚ÌƒvƒŒƒCƒ„[‚ª“üº‚µ‚Ä‚«‚½</summary>
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        _multiManager.AddPlayer();
+        _multiManager.CheckPlayerCount();
 
         Debug.Log("OnPlayerEnteredRoom: " + newPlayer.NickName);
     }
@@ -161,6 +161,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
     /// <summary>©•ª‚Ì‚¢‚é•”‰®‚©‚ç‘¼‚ÌƒvƒŒƒCƒ„[‚ª‘Şº‚µ‚½</summary>
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        _multiManager.LeftCurrentRoom();
+
         Debug.Log("OnPlayerLeftRoom: " + otherPlayer.NickName);
     }
 

@@ -21,7 +21,15 @@ public class MultiManager : MonoBehaviour
         _isMaster = PhotonNetwork.IsMasterClient;
     }
 
-    public void AddPlayer()
+    public void LeftCurrentRoom()
+    {
+        if (_isMaster) return;
+
+        BaseUI.Instance.ParentActive("Matching", false);
+        PhotonNetwork.Disconnect();
+    }
+
+    public void CheckPlayerCount()
     {
         if (!_isMaster) return;
         
