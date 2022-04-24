@@ -8,7 +8,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour, IManager
 {
     [SerializeField] List<ItemData> _itemDatas;
-
+    
     [System.Serializable]
     class ItemData
     {

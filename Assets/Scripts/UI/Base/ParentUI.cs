@@ -17,6 +17,8 @@ public abstract class ParentUI : MonoBehaviour
     List<ChildrenUI> _uiList = new List<ChildrenUI>();
     public List<ChildrenUI> UIList => _uiList;
 
+    public GameObject Parent => gameObject;
+
     public virtual void SetUp()
     {
         ChildrenUI[] uiList = GetComponentsInChildren<ChildrenUI>();

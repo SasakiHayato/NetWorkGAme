@@ -95,4 +95,14 @@ public class BaseUI : SingletonAttribute<BaseUI>
             else ui.Active(false);
         }
     }
+
+    public GameObject GetParent(int id)
+    {
+        return _uiList.First(u => u.ID == id).Parent;
+    }
+
+    public GameObject GetParent(string path)
+    {
+        return _uiList.First(u => u.Path == path).Parent;
+    }
 }
