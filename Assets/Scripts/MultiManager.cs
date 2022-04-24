@@ -15,10 +15,13 @@ public class MultiManager : MonoBehaviour
     [SerializeField] int _gamePlayer;
 
     bool _isMaster;
-    
+
+    PhotonView _view;
+
     public void SetUp()
     {
         _isMaster = PhotonNetwork.IsMasterClient;
+        _view = GetComponent<PhotonView>();
     }
 
     public void LeftCurrentRoom()
@@ -42,6 +45,6 @@ public class MultiManager : MonoBehaviour
     void ClosedRoom()
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
-        
+        GameManager.Instance.NetworkManager.CallBackRaiseEvent(ReceiverGroup.All, GameSate.Start);
     }
 }

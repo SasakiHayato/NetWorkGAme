@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 // Photon 用の名前空間を参照する
 using ExitGames.Client.Photon;
+using Photon.Pun;
 using Photon.Realtime;
 
 public enum GameSate : byte
@@ -29,8 +30,11 @@ public interface IManager
 /// ゲーム全体を管理するクラス
 /// </summary>
 
-public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
+public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
+    private static GameManager s_instance = null;
+    public static GameManager Instance => s_instance;
+
     List<IManager> _iManagerList;
     Fader _fader;
 
@@ -52,9 +56,9 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     public bool IsDebug { get; set; }
     public bool IsUsingBot { get; private set; }
 
-    public override void SetUp()
+    void Awake()
     {
-        base.SetUp();
+        if (s_instance == null) s_instance = this;
 
         CurrentGameState = GameSate.Title;
         FieldManager = null;

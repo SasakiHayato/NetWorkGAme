@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 // Photon 用の名前空間を参照する
 using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 
 /// <summary>
 /// シーン再生時のSetUpクラス
@@ -13,16 +15,10 @@ public class GamePresenter : MonoBehaviour
     [SerializeField] int _countDownTime;
     [SerializeField] bool _isDebug;
 
-    void Awake()
-    {
-        GameManager gameManager = new GameManager();
-        GameManager.SetInstance(gameManager, gameManager);
-
-        GameManager.Instance.IsDebug = _isDebug;
-    }
-
     void Start()
     {
+        GameManager.Instance.IsDebug = _isDebug;
+
         BaseUI baseUI = new BaseUI();
         BaseUI.SetInstance(baseUI, baseUI);
 

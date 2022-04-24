@@ -39,6 +39,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks // Photon Realtime —p‚Ìƒ
     }
 
     /// <summary>
+    /// RaizeEvent‚ÌŒÄ‚Ño‚µ
+    /// </summary>
+    /// <param name="receiver">’N‚É“`‚¦‚é‚©</param>
+    /// <param name="gameSate">‚Ç‚ÌƒQ[ƒ€ƒXƒe[ƒg‚É‚·‚é‚©</param>
+    public void CallBackRaiseEvent(ReceiverGroup receiver, GameSate gameSate)
+    {
+        Debug.Log("aaaa");
+
+        RaiseEventOptions raiseEvent = new RaiseEventOptions();
+        raiseEvent.Receivers = receiver;
+        PhotonNetwork.RaiseEvent((byte)gameSate, null, raiseEvent, new SendOptions());
+    }
+
+    /// <summary>
     /// ƒƒr[‚É“ü‚é
     /// </summary>
     void JoinLobby()
