@@ -70,8 +70,14 @@ public class FieldManager : MonoBehaviour, IManager
     public void JudgeNotes()
     {
         if (_notesResponsible.NotesDistance == default) return;
+
+        NotesObjectData notesObjectData = _notesResponsible.FirstNoteData.NotesObjectData;
         
-        if (_notesJudgement.ClickJudge()) _notesResponsible.Delete();
+        if (_notesJudgement.IsCleckJudge)
+        {
+            _notesJudgement.TypeJudge(notesObjectData);
+            _notesResponsible.Delete();
+        }
     }
 
     // IManager

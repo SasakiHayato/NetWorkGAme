@@ -36,6 +36,7 @@ public class NotesResponsible
     public class NotesData
     {
         public GameObject Target;
+        public NotesObjectData NotesObjectData;
         
         public float constantA;
         public float constantB;
@@ -63,6 +64,10 @@ public class NotesResponsible
     }
 
     public Vector2 EndPostion => _notesPosMasterData.EndPosition.position;
+
+    /// <summary>
+    /// Listの先頭のノーツデータ
+    /// </summary>
     public NotesData FirstNoteData
     {
         get
@@ -130,7 +135,7 @@ public class NotesResponsible
         SpriteRenderer spriteRenderer = obj.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = notesData.Sprite;
 
-        SetNotesData(obj);
+        SetNotesData(obj, notesData);
     }
 
     FieldNotesData GetProbabilityData(int parcent)
@@ -141,24 +146,12 @@ public class NotesResponsible
             {
                 return _fieldNotesDatas.GetData(data.ObjectType);
             }
-                
         }
 
         return null;
     }
 
-    /// <summary>
-    /// ノーツの削除
-    /// </summary>
-    public void Delete()
-    {
-        if (_notesDatas.Count <= 0) return;
-
-        Object.Destroy(_notesDatas.First().Target);
-        _notesDatas.Remove(_notesDatas.First());
-    }
-
-    void SetNotesData(GameObject target)
+    void SetNotesData(GameObject target, FieldNotesData fieldNotesData)
     {
         float setPosX = Random.Range(_notesPosMasterData.SetPoitions[0].position.x, _notesPosMasterData.SetPoitions[1].position.x);
         float setPosY = Random.Range(_notesPosMasterData.SetPoitions[0].position.y, _notesPosMasterData.SetPoitions[1].position.y);
@@ -172,11 +165,26 @@ public class NotesResponsible
 
         NotesData notesData = new NotesData();
         notesData.Target = target;
-        
+
+        NotesObjectData notesObjectData = new NotesObjectData();
+        notesObjectData.SetUp(fieldNotesData);
+        notesData.NotesObjectData = notesObjectData;
+
         notesData.constantA = ((setPosY - centerPosY) * (setPosX - endPos.x) - (setPosY - endPos.y) * (setPosX - centerPosX)) / ((setPosX - centerPosX) * (setPosX - endPos.x) * (centerPosX - endPos.x));
         notesData.constantB = (setPosY - centerPosY) / (setPosX - centerPosX) - notesData.constantA * (setPosX + centerPosX);
         notesData.constantC = setPosY - notesData.constantA * setPosX * setPosX - notesData.constantB * setPosX;
 
         _notesDatas.Add(notesData);
+    }
+
+    /// <summary>
+    /// ノーツの削除
+    /// </summary>
+    public void Delete()
+    {
+        if (_notesDatas.Count <= 0) return;
+
+        Object.Destroy(_notesDatas.First().Target);
+        _notesDatas.Remove(_notesDatas.First());
     }
 }

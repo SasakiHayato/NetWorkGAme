@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fieldNotesDatas: {fileID: 11400000, guid: 4c95c65d117fb784a92405244df414cc, type: 2}
   _isDebugObjectDataPath: 
-  _playSecondTime: 5
+  _playSecondTime: 15
   _postionData:
     SetPoitions:
     - {fileID: 5274649454524512545}
@@ -220,12 +220,12 @@ MonoBehaviour:
     Datas:
     - ObjectType: 0
       MinPacent: 0
-      MaxParcent: 65
+      MaxParcent: 70
     - ObjectType: 1
-      MinPacent: 66
-      MaxParcent: 85
+      MinPacent: 71
+      MaxParcent: 95
     - ObjectType: 2
-      MinPacent: 86
+      MinPacent: 96
       MaxParcent: 100
   _notesJudgeDistData:
     DeadDist: 3

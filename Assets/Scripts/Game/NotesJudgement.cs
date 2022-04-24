@@ -28,6 +28,18 @@ public class NotesJudgement
     NotesJudgeDistData _distData;
 
     float _deadDist;
+
+    /// <summary>
+    /// 正常にClickしたかの判定
+    /// </summary>
+    public bool IsCleckJudge
+    {
+        get
+        {
+            if (_distData.DeadDist < _notesResponsible.NotesDistance) return false;
+            else return true;
+        }
+    }
     
     /// <summary>
     /// NotesJudgementの初期化
@@ -60,7 +72,10 @@ public class NotesJudgement
         {
             if (_notesResponsible.NotesDistance > _deadDist)
             {
-                GameManager.Instance.ScoreManager.Add(ScoreType.Miss);
+                NotesObjectData notesData = _notesResponsible.FirstNoteData.NotesObjectData;
+                if (notesData.NotesData.ObjectType == FieldNotesDataBase.ObjectType.BreakTarget)
+                    GameManager.Instance.ScoreManager.Add(ScoreType.Miss);
+
                 return true;
             }
         }
@@ -69,24 +84,41 @@ public class NotesJudgement
     }
 
     /// <summary>
-    /// 入力を行った際の判定
+    /// ノーツType判定処理
     /// </summary>
-    public bool ClickJudge()
+    /// <param name="objectType">ノーツタイプ</param>
+    public void TypeJudge(NotesObjectData notesObjectData)
     {
-        if (_distData.DeadDist < _notesResponsible.NotesDistance) return false;
-       
+        switch (notesObjectData.NotesData.ObjectType)
+        {
+            case FieldNotesDataBase.ObjectType.BreakTarget:
+                ScoreJudge();
+
+                break;
+            case FieldNotesDataBase.ObjectType.Obstacle:
+                GameManager.Instance.SoundsManager.Request("Obstacle");
+                GameManager.Instance.ScoreManager.Add(ScoreType.Miss);
+
+                break;
+            case FieldNotesDataBase.ObjectType.Item:
+                GameManager.Instance.SoundsManager.Request("UseItem");
+                BaseUI.Instance.CallBack("Game", "Judge", new object[] { "Item!!" });
+
+                break;
+        }
+    }
+
+    void ScoreJudge()
+    {
         foreach (NotesJudgeDistData.Data data in _distData.Datas)
         {
             if (data.Dist > _notesResponsible.NotesDistance)
             {
-
                 GameManager.Instance.ScoreManager.Add(data.Path);
-                return true;
+                return;
             }
         }
-        
-        GameManager.Instance.ScoreManager.Add(ScoreType.Miss);
 
-        return true;
+        GameManager.Instance.ScoreManager.Add(ScoreType.Miss);
     }
 }
