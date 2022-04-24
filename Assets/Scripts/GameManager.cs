@@ -82,15 +82,15 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
             case (byte)GameSate.End:
                 BaseUI.Instance.CallBack("Game", "EndGameButton");
+                GameEnd();
 
                 break;
             case (byte)GameSate.Result:
-                _fader.Slide(() => BaseUI.Instance.AtParantActive("Result"), Fader.ActionTiming.Center);
+                _fader.Slide(() => BaseUI.Instance.AtParantActive("Result"), Fader.ActionTiming.Center)
+                    .AddEndFadeEvent(ResultData.SetData);
 
                 BaseUI.Instance.CallBackParent("Title");
                 BaseUI.Instance.CallBackParent("Game");
-
-                GameEnd();
 
                 break;
 
@@ -120,8 +120,6 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     {
         GameObject resultData = Object.Instantiate((GameObject)Resources.Load("Systems/ResultData"));
         ResultData = resultData.GetComponent<ResultData>();
-        ResultData.SetData();
-
         _iManagerList.Add(ResultData);
 
         RemoveManager("FieldManager");
