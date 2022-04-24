@@ -16,7 +16,7 @@ public class ResultData : MonoBehaviour, IManager
 
         object[] data = { _score, _comboCount };
         BaseUI.Instance.CallBack("Result", "ResultDisplay", data);
-        BaseUI.Instance.CallBack("Result", "ResultAnimation");
+        BaseUI.Instance.CallBack("Result", "ResultAnimation", new object[] { false });
     }
 
     // IManager
