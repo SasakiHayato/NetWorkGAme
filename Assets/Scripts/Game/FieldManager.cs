@@ -22,6 +22,8 @@ public class FieldManager : MonoBehaviour, IManager
     NotesResponsible _notesResponsible;
     NotesJudgement _notesJudgement;
 
+    public bool IsRemoveObstacle { get; set; }
+
     void Start()
     {
         _notesResponsible = new NotesResponsible(_fieldNotesDatas, _postionData, _probabilityData);
@@ -30,13 +32,14 @@ public class FieldManager : MonoBehaviour, IManager
         _notesJudgement = new NotesJudgement(_notesJudgeDistData, _notesResponsible);
 
         _createTimer = 0;
+        IsRemoveObstacle = false;
     }
 
     void Update()
     {
         GameTime();
 
-        CreateNote();
+        CreateNotes();
         _notesResponsible.NotesUpDate();
 
         if (_notesJudgement.UpDateJudge()) _notesResponsible.Delete();
@@ -56,7 +59,7 @@ public class FieldManager : MonoBehaviour, IManager
         }
     }
 
-    void CreateNote()
+    void CreateNotes()
     {
         _createTimer += Time.deltaTime;
 

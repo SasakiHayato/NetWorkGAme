@@ -126,7 +126,11 @@ public class NotesResponsible
         }
         else
         {
-            float pacent = Random.value * 100;
+            float pacent;
+
+            if (GameManager.Instance.FieldManager.IsRemoveObstacle) pacent = 0;
+            else pacent = Random.value * 100;
+            
             notesData = GetProbabilityData((int)pacent);
         }
 
