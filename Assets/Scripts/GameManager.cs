@@ -72,6 +72,12 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         _iManagerList = new List<IManager>();
     }
 
+    public void Opning()
+    {
+        _fader.SetFade(Fader.FadeType.In);
+        SoundsManager.Request("TitleBGM");
+    }
+
     public void OnEvent(EventData eventData)
     {
         CurrentGameState = (GameSate)eventData.Code;

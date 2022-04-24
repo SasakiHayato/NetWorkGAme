@@ -11,26 +11,31 @@ public class BotManager : MonoBehaviour, IManager
     float _timer;
 
     BotPlayer _botPlayer;
-    List<FieldNotesDataBase.ObjectType> _objectTypeList;
+    List<NotesData> _notesList;
 
-    public FieldNotesDataBase.ObjectType FirstListType
+    public class NotesData
+    {
+        public FieldNotesDataBase.ObjectType ObjectType;
+        public Vector2 NotesPosition;
+    }
+
+    public NotesData FirstListType
     {
         get
         {
-            if (_objectTypeList.Count <= 0) return default;
-            else return _objectTypeList.First();
+            if (_notesList.Count <= 0) return default;
+            else return _notesList.First();
         }
     }
 
     public float CreateNotesTime { get; set; }
-    public Vector2 NotesPostion { get; private set; }
     public Vector2 JudgePos { get; set; }
 
     public NotesResponsible.NotesProbabilityData NotesProbabilityData { get; set; }
 
     void Start()
     {
-        _objectTypeList = new List<FieldNotesDataBase.ObjectType>();
+        _notesList = new List<NotesData>();
         _botPlayer = new BotPlayer();
     }
 
@@ -55,7 +60,11 @@ public class BotManager : MonoBehaviour, IManager
         if (GameManager.Instance.FieldManager.IsRemoveObstacle) pacent = 0;
         else pacent = Random.value * 100;
 
-        _objectTypeList.Add(GetProbabilityData((int)pacent)); 
+        NotesData notesData = new NotesData();
+        notesData.ObjectType = GetProbabilityData((int)pacent);
+
+
+        _notesList.Add(notesData); 
     }
 
     FieldNotesDataBase.ObjectType GetProbabilityData(int parcent)

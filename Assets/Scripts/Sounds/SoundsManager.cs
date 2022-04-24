@@ -18,17 +18,11 @@ public class SoundsManager : MonoBehaviour
     public float BGMVolume { get => _bgmVolume; set { _bgmVolume = value; } }
     public float SEVolume { get => _seVolume; set { _seVolume = value; } }
 
-    bool _isSetUp = false;
-
     ObjectPool<SoundEffect> _soundEffect;
     SoundEffect _bgmEffect = null;
 
     public void SetUp()
     {
-        if (_isSetUp) return;
-
-        _isSetUp = true;
-
         _soundEffect = new ObjectPool<SoundEffect>();
         _soundEffect.SetUp(_soundPrefab, transform);
     }

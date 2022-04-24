@@ -10,7 +10,7 @@ using ExitGames.Client.Photon;
 public class GamePresenter : MonoBehaviour
 {
     [SerializeField] GameSate _gameSate;
-    [SerializeField] int _countTime;
+    [SerializeField] int _countDownTime;
     [SerializeField] bool _isDebug;
 
     void Awake()
@@ -27,6 +27,10 @@ public class GamePresenter : MonoBehaviour
         BaseUI.SetInstance(baseUI, baseUI);
 
         if (_isDebug) IsDebug();
+        else
+        {
+            GameManager.Instance.Opning();
+        }
     }
 
     void IsDebug()
@@ -54,14 +58,14 @@ public class GamePresenter : MonoBehaviour
         while (!endCount)
         {
             timer += Time.deltaTime;
-            if (timer > _countTime) endCount = true;
+            if (timer > _countDownTime) endCount = true;
             else
             {
                 if ((int)timer != saveTime)
                 {
                     saveTime = (int)timer;
                     GameManager.Instance.SoundsManager.Request("CountDown");
-                    string data = (_countTime - saveTime).ToString();
+                    string data = (_countDownTime - saveTime).ToString();
                     BaseUI.Instance.CallBack("Game", "CountDown", new object[] { data, false });
                 }
             }
