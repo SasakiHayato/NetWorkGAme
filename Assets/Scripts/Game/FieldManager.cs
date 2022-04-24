@@ -15,10 +15,9 @@ public class FieldManager : MonoBehaviour, IManager
     [SerializeField] NotesResponsible.NotesProbabilityData _probabilityData;
     [SerializeField] NotesJudgement.NotesJudgeDistData _notesJudgeDistData;
     
-
     float _createTimer;
     float _gameTimer;
-
+    
     NotesResponsible _notesResponsible;
     NotesJudgement _notesJudgement;
 

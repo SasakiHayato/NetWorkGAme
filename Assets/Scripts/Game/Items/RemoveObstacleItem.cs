@@ -12,7 +12,6 @@ public class RemoveObstacleItem : ItemBase
 
     public override void Use()
     {
-        Debug.Log("aaaaaaaaaaa");
         GameManager.Instance.FieldManager.IsRemoveObstacle = true;
         EndEffect().Forget();
     }
@@ -21,6 +20,5 @@ public class RemoveObstacleItem : ItemBase
     {
         await UniTask.Delay(TimeSpan.FromSeconds(_effectTime));
         GameManager.Instance.FieldManager.IsRemoveObstacle = false;
-        Debug.Log("aaaaaaaaaaa");
     }
 }
