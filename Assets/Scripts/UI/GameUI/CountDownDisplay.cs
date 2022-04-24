@@ -14,12 +14,14 @@ public class CountDownDisplay : ChildrenUI
     Text _countDouwnTxt;
     RectTransform _rect;
 
+    Color _offsetColor;
     const float DurationTime = 0.4f;
 
     public override void SetUp()
     {
         _countDouwnTxt = GetComponent<Text>();
         _countDouwnTxt.text = "";
+        _offsetColor = _countDouwnTxt.color;
 
         _rect = GetComponent<RectTransform>();
     }
@@ -33,6 +35,7 @@ public class CountDownDisplay : ChildrenUI
 
         Sequence sequence = DOTween.Sequence();
         _rect.localScale = Vector2.zero;
+        _countDouwnTxt.color = _offsetColor;
 
         sequence.Join(_rect.DOScale(_setScale, DurationTime))
             .Join(_rect.DOLocalRotate(new Vector3(0, 0, 360), DurationTime, RotateMode.FastBeyond360))

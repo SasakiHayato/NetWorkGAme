@@ -42,6 +42,7 @@ public class GamePresenter : MonoBehaviour
     /// </summary>
     public void CountDown()
     {
+        Debug.Log("SetCountDown");
         StartCoroutine(ICounDown());
     }
 

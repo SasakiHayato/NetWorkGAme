@@ -81,7 +81,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
                 break;
 
             case (byte)GameSate.End:
-                BaseUI.Instance.CallBack("Game", "EndGameButton");
+                BaseUI.Instance.CallBack("Game", "EndGameButton", new object[] { false });
                 GameEnd();
 
                 break;

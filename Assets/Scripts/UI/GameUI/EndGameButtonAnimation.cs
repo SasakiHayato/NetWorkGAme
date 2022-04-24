@@ -24,8 +24,18 @@ public class EndGameButtonAnimation : ChildrenUI
 
     public override void CallBack(object[] datas = null)
     {
-        _rect.DOScale(Vector3.one, Duration)
+        bool isInit = (bool)datas[0];
+
+        if (isInit)
+        {
+            _rect.localScale = Vector2.zero;
+            _image.raycastTarget = false;
+        }
+        else
+        {
+            _rect.DOScale(Vector3.one, Duration)
             .SetEase(Ease.Linear)
             .OnComplete(() => _image.raycastTarget = true);
+        }
     }
 }
