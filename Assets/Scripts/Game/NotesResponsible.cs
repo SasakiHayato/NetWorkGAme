@@ -37,7 +37,7 @@ public class NotesResponsible
     {
         public GameObject Target;
         public NotesObjectData NotesObjectData;
-        
+        public float Timer;
         public float constantA;
         public float constantB;
         public float constantC;
@@ -77,7 +77,7 @@ public class NotesResponsible
         }
     }
 
-    const float NotesSpeed = 0.02f;
+    const float NotesSpeed = 5f;
 
     /// <summary>
     /// NotesResponsibleÇÃèâä˙âª
@@ -107,7 +107,9 @@ public class NotesResponsible
 
     Vector2 SetPostion(NotesData data)
     {
-        float x = data.Target.transform.position.x - NotesSpeed;
+        data.Timer -= Time.deltaTime * NotesSpeed;
+
+        float x = data.Timer;
         float y = (data.constantA * x * x) + (data.constantB * x) + data.constantC;
 
         return new Vector2(x, y);
@@ -168,6 +170,7 @@ public class NotesResponsible
 
         NotesData notesData = new NotesData();
         notesData.Target = target;
+        notesData.Timer = setPosX;
 
         NotesObjectData notesObjectData = new NotesObjectData();
         notesObjectData.SetUp(fieldNotesData);
