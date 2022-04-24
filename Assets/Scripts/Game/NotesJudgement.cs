@@ -103,6 +103,7 @@ public class NotesJudgement
             case FieldNotesDataBase.ObjectType.Item:
                 GameManager.Instance.SoundsManager.Request("UseItem");
                 BaseUI.Instance.CallBack("Game", "Judge", new object[] { "Item!!" });
+                GameManager.Instance.ItemManager.Request();
 
                 break;
         }

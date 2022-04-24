@@ -19,3 +19,6 @@ MonoBehaviour:
   - Path: Bard
     ObjectType: 1
     Sprite: {fileID: 21300000, guid: f1dde78d4f8e4954f9905cc1d60e123a, type: 3}
+  - Path: Item
+    ObjectType: 2
+    Sprite: {fileID: 21300000, guid: f00feafcf0675cd47a48f83ae42b06d4, type: 3}

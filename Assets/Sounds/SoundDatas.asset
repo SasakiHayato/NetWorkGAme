@@ -41,3 +41,11 @@ MonoBehaviour:
     SoundType: 1
     AudioClip: {fileID: 8300000, guid: 8195dd8745c0ef640ae6face47bca23c, type: 3}
     Volume: 0.541
+  - Path: Obstacle
+    SoundType: 1
+    AudioClip: {fileID: 8300000, guid: bc008f58d120e5c4f9b5c66c4c6e4eec, type: 3}
+    Volume: 0.303
+  - Path: UseItem
+    SoundType: 1
+    AudioClip: {fileID: 8300000, guid: 6ee47962d8a120e4b9fc91656b522d9b, type: 3}
+    Volume: 0.541

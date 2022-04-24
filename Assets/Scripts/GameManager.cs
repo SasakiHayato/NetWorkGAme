@@ -46,6 +46,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     public NetworkManager NetworkManager { get; private set; }
     public GamePresenter GamePresenter { get; private set; }
     public ResultData ResultData { get; private set; }
+    public ItemManager ItemManager { get; private set; }
 
     public bool IsDebug { get; set; }
 
@@ -88,6 +89,8 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
                 
                 break;
             case (byte)GameSate.InGame:
+                BaseUI.Instance.ParentActive("Item", true);
+
                 SoundsManager.Request("InGameBGM");
                 SoundsManager.Request("CountDownStart");
                 InGameSetUp();
@@ -128,6 +131,11 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         ScoreManager = scoreManager.GetComponent<ScoreManager>();
 
         _iManagerList.Add(ScoreManager);
+
+        GameObject itemManager = Object.Instantiate((GameObject)Resources.Load("Systems/ItemManager"));
+        ItemManager = itemManager.GetComponent<ItemManager>();
+
+        _iManagerList.Add(ItemManager);
     }
 
     void GameEnd()
@@ -138,6 +146,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
         RemoveManager("FieldManager");
         RemoveManager("ScoreManager");
+        RemoveManager("ItemManager");
     }
 
     void RemoveManager(string path)
