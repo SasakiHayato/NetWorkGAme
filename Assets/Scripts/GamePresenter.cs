@@ -13,6 +13,8 @@ public class GamePresenter : MonoBehaviour
     [SerializeField] int _countTime;
     [SerializeField] bool _isDebug;
 
+    BotPlayer _botPlayer;
+
     void Awake()
     {
         GameManager gameManager = new GameManager();
@@ -23,6 +25,8 @@ public class GamePresenter : MonoBehaviour
 
     void Start()
     {
+        _botPlayer = GetComponent<BotPlayer>();
+
         BaseUI baseUI = new BaseUI();
         BaseUI.SetInstance(baseUI, baseUI);
 
@@ -35,6 +39,14 @@ public class GamePresenter : MonoBehaviour
         EventData eventData = new EventData();
         eventData.Code = (byte)GameManager.Instance.CurrentGameState;
         GameManager.Instance.OnEvent(eventData);
+    }
+
+    /// <summary>
+    /// SoroƒQ[ƒ€—p‚Ì‘Îí‘Šè‚Ì¶¬
+    /// </summary>
+    public void SetBotPlayer()
+    {
+        _botPlayer.SetUp();
     }
 
     /// <summary>

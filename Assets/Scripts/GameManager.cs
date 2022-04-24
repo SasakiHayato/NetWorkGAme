@@ -13,6 +13,12 @@ public enum GameSate : byte
     Title,
 }
 
+public enum GameType
+{
+    Soro,
+    Multi,
+}
+
 public interface IManager
 {
     Object ManagerObject();
@@ -30,6 +36,9 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
     public GameSate CurrentGameState { get; private set; }
     public void SetGameState(GameSate gameSate) => CurrentGameState = gameSate;
+
+    public GameType CurrentGameType { get; private set; }
+    public void SetGameType(GameType gameType) => CurrentGameType = gameType;
 
     public FieldManager FieldManager { get; private set; }
     public ScoreManager ScoreManager { get; private set; }
@@ -68,6 +77,11 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         {
             case (byte)GameSate.Start:
                 SoundsManager.StopBGM();
+
+                if (CurrentGameType == GameType.Soro)
+                {
+                    GamePresenter.SetBotPlayer();
+                }
 
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Game"), Fader.ActionTiming.Center)
                     .AddEndFadeEvent(GamePresenter.CountDown);

@@ -33,6 +33,8 @@ public class StartButtons : MonoBehaviour
 
     void Soro()
     {
+        GameManager.Instance.SetGameType(GameType.Soro);
+
         EventData eventData = new EventData();
         eventData.Code = (byte)GameSate.Start;
         GameManager.Instance.OnEvent(eventData);
@@ -40,6 +42,7 @@ public class StartButtons : MonoBehaviour
 
     void Multi()
     {
+        GameManager.Instance.SetGameType(GameType.Multi);
         GameManager.Instance.NetworkManager.Connect();
     }
 }

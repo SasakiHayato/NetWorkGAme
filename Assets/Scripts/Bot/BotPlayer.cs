@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// SoroÉQÅ[ÉÄÇÃç€ÇÃBotêßå‰ÉNÉâÉX
+/// </summary>
+
+public class BotPlayer : MonoBehaviour
+{
+    public void SetUp()
+    {
+
+    }
+}
