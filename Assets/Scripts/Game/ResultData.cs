@@ -14,7 +14,9 @@ public class ResultData : MonoBehaviour, IManager
         _score = GameManager.Instance.ScoreManager.CurrentScore;
         _comboCount = GameManager.Instance.ScoreManager.CurrentComboCount;
 
-
+        object[] data = { _score, _comboCount };
+        BaseUI.Instance.CallBack("Result", "ResultDisplay", data);
+        BaseUI.Instance.CallBack("Result", "ResultAnimation");
     }
 
     // IManager

@@ -11,7 +11,7 @@ public class EndGameButtonAnimation : ChildrenUI
     RectTransform _rect;
     Image _image;
 
-    const float Duration = 0.5f;
+    const float Duration = 0.2f;
 
     public override void SetUp()
     {
