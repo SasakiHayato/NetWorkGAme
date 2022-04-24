@@ -23,6 +23,8 @@ public class FieldManager : MonoBehaviour, IManager
 
     public bool IsRemoveObstacle { get; set; }
 
+    const float CretaeTime = 0.5f;
+
     void Start()
     {
         _notesResponsible = new NotesResponsible(_fieldNotesDatas, _postionData, _probabilityData);
@@ -32,6 +34,13 @@ public class FieldManager : MonoBehaviour, IManager
 
         _createTimer = 0;
         IsRemoveObstacle = false;
+
+        if (GameManager.Instance.IsUsingBot)
+        {
+            GameManager.Instance.BotManager.CreateNotesTime = CretaeTime;
+            GameManager.Instance.BotManager.NotesProbabilityData = _probabilityData;
+            GameManager.Instance.BotManager.JudgePos = _notesResponsible.EndPostion;
+        }
     }
 
     void Update()
@@ -62,7 +71,7 @@ public class FieldManager : MonoBehaviour, IManager
     {
         _createTimer += Time.deltaTime;
 
-        if (_createTimer > 0.5f)
+        if (_createTimer > CretaeTime)
         {
             _createTimer = 0;
             _notesResponsible.Create();

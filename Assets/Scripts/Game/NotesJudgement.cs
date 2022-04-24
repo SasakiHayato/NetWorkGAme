@@ -86,7 +86,7 @@ public class NotesJudgement
     /// <summary>
     /// ノーツType判定処理
     /// </summary>
-    /// <param name="objectType">ノーツタイプ</param>
+    /// <param name="notesObjectData">ノーツタイプ</param>
     public void TypeJudge(NotesObjectData notesObjectData)
     {
         switch (notesObjectData.NotesData.ObjectType)

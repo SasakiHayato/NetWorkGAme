@@ -47,8 +47,10 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
     public GamePresenter GamePresenter { get; private set; }
     public ResultData ResultData { get; private set; }
     public ItemManager ItemManager { get; private set; }
+    public BotManager BotManager { get; private set; }
 
     public bool IsDebug { get; set; }
+    public bool IsUsingBot { get; private set; }
 
     public override void SetUp()
     {
@@ -81,7 +83,16 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
 
                 if (CurrentGameType == GameType.Soro)
                 {
-                    GamePresenter.SetBotPlayer();
+                    IsUsingBot = true;
+
+                    GameObject botManager = Object.Instantiate((GameObject)Resources.Load("Systems/BotManager"));
+                    BotManager = botManager.GetComponent<BotManager>();
+
+                    _iManagerList.Add(BotManager);
+                }
+                else
+                {
+                    IsUsingBot = false;
                 }
 
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Game"), Fader.ActionTiming.Center)
@@ -147,6 +158,7 @@ public class GameManager : SingletonAttribute<GameManager>, IOnEventCallback
         RemoveManager("FieldManager");
         RemoveManager("ScoreManager");
         RemoveManager("ItemManager");
+        RemoveManager("BotManager");
     }
 
     void RemoveManager(string path)

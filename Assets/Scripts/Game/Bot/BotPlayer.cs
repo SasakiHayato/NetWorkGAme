@@ -4,25 +4,17 @@ using UnityEngine;
 /// SoroÉQÅ[ÉÄÇÃç€ÇÃBotêßå‰ÉNÉâÉX
 /// </summary>
 
-public class BotPlayer : MonoBehaviour
+public class BotPlayer
 {
-    [SerializeField] Transform _judgePrefab;
-
-    bool _isSetUp = false;
-
-    GameObject _judgePrefabClone;
-
-    void Update()
+    public void BotUpdate()
     {
-        if (!_isSetUp) return;
+        if (GameManager.Instance.CurrentGameState != GameSate.InGame) return;
+
+
     }
 
-    public void SetUp()
+    void NotesJudge()
     {
-        GameObject obj = new GameObject(_judgePrefab.name + "ToBot");
-        obj.transform.position = _judgePrefab.position;
-        _judgePrefabClone = obj;
 
-        _isSetUp = true;
     }
 }
