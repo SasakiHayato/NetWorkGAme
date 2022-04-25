@@ -14,9 +14,11 @@ public class GamePresenter : MonoBehaviour
     [SerializeField] GameSate _gameSate;
     [SerializeField] int _countDownTime;
     [SerializeField] bool _isDebug;
+    [SerializeField] GameObject _inGameObject;
     [SerializeField] BackGroundData _backGroundData;
 
     public Sprite FadeSprite => _backGroundData.FadeSprite;
+    public GameObject InGaneObject => _inGameObject;
 
     void Start()
     {
@@ -30,6 +32,8 @@ public class GamePresenter : MonoBehaviour
         {
             GameManager.Instance.Opning();
         }
+
+        _inGameObject.SetActive(false);
     }
 
     void IsDebug()

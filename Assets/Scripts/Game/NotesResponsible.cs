@@ -78,6 +78,7 @@ public class NotesResponsible
     }
 
     const float NotesSpeed = 5f;
+    const int NotesSortOrder = 10;
 
     /// <summary>
     /// NotesResponsible‚Ì‰Šú‰»
@@ -139,6 +140,7 @@ public class NotesResponsible
         GameObject obj = new GameObject($"{notesData.Path}");
         SpriteRenderer spriteRenderer = obj.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = notesData.Sprite;
+        spriteRenderer.sortingOrder = NotesSortOrder;
 
         SetNotesData(obj, notesData);
     }

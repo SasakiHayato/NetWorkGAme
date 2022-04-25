@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Game"), Fader.ActionTiming.Center)
                     .AddCenterFadeEvent(() => GamePresenter.ChangeBackGround(CurrentGameState))
+                    .AddCenterFadeEvent(() => GamePresenter.InGaneObject.SetActive(true))
                     .AddEndFadeEvent(GamePresenter.CountDown);
                 
                 break;
@@ -132,6 +133,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Result"), Fader.ActionTiming.Center)
                     .AddEndFadeEvent(() => BaseUI.Instance.CallBack("Result", "ResultAnimation", new object[] { false }))
                     .AddCenterFadeEvent(() => GamePresenter.ChangeBackGround(CurrentGameState))
+                    .AddCenterFadeEvent(() => GamePresenter.InGaneObject.SetActive(false))
                     .AddEndFadeEvent(() => ResultData.Judge());
                 
                 ResultData.SetMyData();
