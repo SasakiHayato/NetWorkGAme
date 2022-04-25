@@ -10,7 +10,16 @@ using Photon.Realtime;
 
 public class ResultData : MonoBehaviour, IManager, INetworkManager
 {
+    public enum JudgeType
+    {
+        Win,
+        Lose,
+        Dorrow,
+    }
+
     object[] _data;
+
+    int _otherScore;
 
     // INetworkManager
     public PhotonView ManagerPhotonView { get; set; }
@@ -28,13 +37,33 @@ public class ResultData : MonoBehaviour, IManager, INetworkManager
 
     public void SendMyData()
     {
-        ManagerPhotonView.RPC("SendData", RpcTarget.Others, _data);
+        ManagerPhotonView.RPC("GetData", RpcTarget.Others, _data);
     }
 
     [PunRPC]
-    void SendData(object[] data)
+    void GetData(object[] data)
     {
+        _otherScore = (int)data[0];
         BaseUI.Instance.CallBack("Result", "OtherResultDisplay", data);
+    }
+
+    public void Judge()
+    {
+        JudgeType type;
+        if ((int)_data[0] > _otherScore)
+        {
+            type = JudgeType.Win;
+        }
+        else if ((int)_data[0] < _otherScore)
+        {
+            type = JudgeType.Lose;
+        }
+        else
+        {
+            type = JudgeType.Dorrow;
+        }
+
+        BaseUI.Instance.CallBack("Result", "ResultJudgeDisplay", new object[] { type });
     }
 
     // IManager

@@ -127,7 +127,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 break;
             case (byte)GameSate.Result:
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Result"), Fader.ActionTiming.Center)
-                    .AddEndFadeEvent(() => BaseUI.Instance.CallBack("Result", "ResultAnimation", new object[] { false }));
+                    .AddEndFadeEvent(() => BaseUI.Instance.CallBack("Result", "ResultAnimation", new object[] { false }))
+                    .AddEndFadeEvent(() => ResultData.Judge());
                 
                 ResultData.SetMyData();
 
@@ -142,6 +143,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 break;
 
             case (byte)GameSate.Title:
+
+                if (CurrentGameType == GameType.Multi)
+                {
+                    PhotonNetwork.Disconnect();
+                }
+
                 BaseUI.Instance.AtParantActive("Title");
                 SoundsManager.Request("TitleBGM");
                 RemoveManager("ResultData");
@@ -167,6 +174,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 network.ManagerPhotonView.ViewID = _viewID;
 
                 _viewID++;
+                if (_viewID > 900) _viewID = 0;
             }
         }
     }

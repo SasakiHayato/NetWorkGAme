@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 // Photon —p‚Ì–¼‘O‹óŠÔ‚ğQÆ‚·‚é
 using ExitGames.Client.Photon;
