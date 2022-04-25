@@ -8,23 +8,36 @@ using Photon.Realtime;
 /// UnGameI—¹‚ÌDataŠÇ—ƒNƒ‰ƒX
 /// </summary>
 
-public class ResultData : MonoBehaviour, IManager
+public class ResultData : MonoBehaviour, IManager, INetworkManager
 {
-    int _score;
-    int _comboCount;
+    object[] _data;
 
-    public void SetData()
+    // INetworkManager
+    public PhotonView ManagerPhotonView { get; set; }
+
+    public void SetMyData()
     {
-        _score = GameManager.Instance.ScoreManager.CurrentScore;
-        _comboCount = GameManager.Instance.ScoreManager.CurrentComboCount;
+        int score = GameManager.Instance.ScoreManager.CurrentScore;
+        int comboCount = GameManager.Instance.ScoreManager.CurrentComboCount;
+        int maxCombo = GameManager.Instance.ScoreManager.MaxComboCount;
 
-        object[] data = { _score, _comboCount };
-        BaseUI.Instance.CallBack("Result", "ResultDisplay", data);
-        BaseUI.Instance.CallBack("Result", "ResultAnimation", new object[] { false });
+        _data = new object[] { score, comboCount, maxCombo };
+
+        BaseUI.Instance.CallBack("Result", "MyResultDisplay", _data);
+    }
+
+    public void SendMyData()
+    {
+        ManagerPhotonView.RPC("SendData", RpcTarget.Others, _data);
+    }
+
+    [PunRPC]
+    void SendData(object[] data)
+    {
+        BaseUI.Instance.CallBack("Result", "OtherResultDisplay", data);
     }
 
     // IManager
-    public PhotonView ManagerPhotonView { get; set; }
     public GameObject ManagerObject() => gameObject;
     public string ManagerPath() => GetType().Name;
 }

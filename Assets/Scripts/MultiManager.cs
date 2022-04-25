@@ -42,8 +42,6 @@ public class MultiManager : MonoBehaviour
         }
     }
 
-    
-
     void ClosedRoom()
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;

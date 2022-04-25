@@ -29,16 +29,19 @@ public class ItemManager : MonoBehaviour, IManager, INetworkManager
 
     public void Request()
     {
-        int random = Random.Range(0, _itemDatas.Count);
-
-        switch (_itemDatas[random].EffectTarget)
+        int itemID = Random.Range(0, _itemDatas.Count); ;
+        
+        switch (_itemDatas[itemID].EffectTarget)
         {
             case EffectTarget.My:
-                CallBack(random);
+                CallBack(itemID);
 
                 break;
             case EffectTarget.Other:
-                ManagerPhotonView.RPC("CallBack", RpcTarget.Others, new object[] { random });
+                if (GameManager.Instance.CurrentGameType == GameType.Multi)
+                {
+                    ManagerPhotonView.RPC("CallBack", RpcTarget.Others, new object[] { itemID });
+                }
 
                 break;
         }
@@ -47,8 +50,6 @@ public class ItemManager : MonoBehaviour, IManager, INetworkManager
     [PunRPC]
     void CallBack(int itemID)
     {
-        Debug.Log(itemID);
-
         _itemDatas[itemID].ItemBase.Use();
     }
 

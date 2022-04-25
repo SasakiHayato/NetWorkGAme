@@ -127,7 +127,14 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 break;
             case (byte)GameSate.Result:
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Result"), Fader.ActionTiming.Center)
-                    .AddEndFadeEvent(ResultData.SetData);
+                    .AddEndFadeEvent(() => BaseUI.Instance.CallBack("Result", "ResultAnimation", new object[] { false }));
+                
+                ResultData.SetMyData();
+
+                if (CurrentGameType == GameType.Multi)
+                {
+                    ResultData.SendMyData();
+                }
 
                 BaseUI.Instance.CallBackParent("Title");
                 BaseUI.Instance.CallBackParent("Game");

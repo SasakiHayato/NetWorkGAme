@@ -8,12 +8,16 @@ public class ComboCounter
     int _count;
     public int CurrentCount => _count;
 
+    int _maxCount;
+    public int MaxCount => _maxCount;
+
     int _comboEffectCount;
     int _addEffectCount;
 
     public ComboCounter(int effectCount)
     {
         _count = 0;
+        _maxCount = int.MinValue;
 
         _addEffectCount = 0;
         _comboEffectCount = effectCount;
@@ -31,6 +35,8 @@ public class ComboCounter
             _count = 0;
             _addEffectCount = 0;
         }
+
+        if (_maxCount < _count) _maxCount = _count;
 
         SetEffect();
         BaseUI.Instance.CallBack("Game", "Combo", new object[] { CurrentCount });
