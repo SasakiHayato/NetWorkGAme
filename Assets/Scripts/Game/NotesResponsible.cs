@@ -37,10 +37,13 @@ public class NotesResponsible
     {
         public GameObject Target;
         public NotesObjectData NotesObjectData;
+        
         public float Timer;
         public float constantA;
         public float constantB;
         public float constantC;
+
+        public float Dist;
     }
 
     List<NotesData> _notesDatas;
@@ -58,7 +61,7 @@ public class NotesResponsible
         {
             if (_notesDatas.Count <= 0) return default;
 
-            Vector2 notePos = _notesDatas.First().Target.transform.position;
+            Vector2 notePos = FirstNoteData.Target.transform.position;
             return Vector2.Distance(notePos, _notesPosMasterData.EndPosition.position);
         }
     }
@@ -73,7 +76,11 @@ public class NotesResponsible
         get
         {
             if (_notesDatas.Count <= 0) return null;
-            else return _notesDatas.First();
+            else
+            {
+                _notesDatas.OrderBy(n => n.Dist);
+                return _notesDatas.First();
+            }
         }
     }
 
@@ -103,6 +110,7 @@ public class NotesResponsible
         foreach (NotesData data in _notesDatas)
         {
             data.Target.transform.position = SetPostion(data);
+            data.Dist = Vector2.Distance(data.Target.transform.position, _notesPosMasterData.EndPosition.position);
         }
     }
 
@@ -191,9 +199,9 @@ public class NotesResponsible
     public void Delete()
     {
         if (_notesDatas.Count <= 0) return;
-
-        Object.Destroy(_notesDatas.First().Target);
-        _notesDatas.Remove(_notesDatas.First());
+        NotesData notesData = FirstNoteData;
+        Object.Destroy(notesData.Target);
+        _notesDatas.Remove(notesData);
     }
 
     /// <summary>

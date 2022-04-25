@@ -74,7 +74,9 @@ public class NotesJudgement
             {
                 NotesObjectData notesData = _notesResponsible.FirstNoteData.NotesObjectData;
                 if (notesData.NotesData.ObjectType == FieldNotesDataBase.ObjectType.BreakTarget)
+                {
                     GameManager.Instance.ScoreManager.Add(ScoreType.Miss);
+                }    
 
                 return true;
             }
