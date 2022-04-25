@@ -193,4 +193,15 @@ public class NotesResponsible
         Object.Destroy(_notesDatas.First().Target);
         _notesDatas.Remove(_notesDatas.First());
     }
+
+    /// <summary>
+    /// ‘S‚Ä‚Ìƒm[ƒc‚Ìíœ
+    /// </summary>
+    public void DeleteAll()
+    {
+        if (_notesDatas.Count <= 0) return;
+
+        _notesDatas.ForEach(n => Object.Destroy(n.Target));
+        _notesDatas = new List<NotesData>();
+    }
 }

@@ -62,11 +62,17 @@ public class FieldManager : MonoBehaviour, IManager
 
         if (_gameTimer > _playSecondTime)
         {
-            EventData eventData = new EventData();
-            eventData.Code = (byte)GameSate.End;
-            GameManager.Instance.OnEvent(eventData);
-            return;
+            End();
         }
+    }
+
+    void End()
+    {
+        _notesResponsible.DeleteAll();
+
+        EventData eventData = new EventData();
+        eventData.Code = (byte)GameSate.End;
+        GameManager.Instance.OnEvent(eventData);
     }
 
     void CreateNotes()

@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     PhotonNetwork.Disconnect();
                 }
 
+                BaseUI.Instance.CallBackParent("Result");
                 BaseUI.Instance.AtParantActive("Title");
                 SoundsManager.Request("TitleBGM");
                 RemoveManager("ResultData");

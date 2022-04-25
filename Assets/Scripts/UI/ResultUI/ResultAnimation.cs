@@ -34,7 +34,11 @@ public class ResultAnimation : ChildrenUI
     {
         bool isInit = (bool)datas[0];
 
-        if (isInit) _animDatas.ForEach(d => d.RectTransform.anchoredPosition = d.OffSetPosition);
+        if (isInit)
+        {
+            _animDatas.ForEach(d => d.RectTransform.anchoredPosition = d.OffSetPosition);
+            _animID = 0;
+        }
         else SetAnim();
     }
 
