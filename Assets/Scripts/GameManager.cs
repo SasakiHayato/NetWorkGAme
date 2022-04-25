@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 break;
 
             case (byte)GameSate.End:
+                SoundsManager.StopBGM();
                 BaseUI.Instance.CallBack("Game", "EndGameButton", new object[] { false });
                 GameEnd();
 
@@ -134,7 +135,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     .AddEndFadeEvent(() => BaseUI.Instance.CallBack("Result", "ResultAnimation", new object[] { false }))
                     .AddCenterFadeEvent(() => GamePresenter.ChangeBackGround(CurrentGameState))
                     .AddCenterFadeEvent(() => GamePresenter.InGaneObject.SetActive(false))
-                    .AddEndFadeEvent(() => ResultData.Judge());
+                    .AddEndFadeEvent(() => ResultData.Judge())
+                    .AddEndFadeEvent(() => SoundsManager.Request("ResultBGM"));
                 
                 ResultData.SetMyData();
 
