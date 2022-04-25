@@ -30,12 +30,14 @@ public class Fader
     Image _fadeImage;
     RectTransform _rect;
 
-    Action _action;
+    Action _fadeEndAction;
+    Action _fadeCenterAction;
 
     public Fader()
     {
         _isFade = false;
-        _action = null;
+        _fadeEndAction = null;
+        _fadeCenterAction = null;
 
         Create();
     }
@@ -68,9 +70,26 @@ public class Fader
         _rect.offsetMax = Vector2.zero;
     }
 
+    public Fader SetImageSouce(Sprite sprite = null)
+    {
+        if (sprite == null)
+        {
+            _fadeImage.color = Color.black;
+        }
+        else
+        {
+            _fadeImage.color = Color.white;
+            _fadeImage.sprite = sprite;
+        }
+
+        return this;
+    }
+
     public Fader SetFade(FadeType type, Action action = null)
     {
+        _fadeImage.enabled = true;
         action += EndFade;
+        CenterFadeEvent().Forget();
 
         _isFade = false;
         Color color = _fadeImage.color;
@@ -95,7 +114,9 @@ public class Fader
 
     public Fader Slide(Action action = null, ActionTiming timing = ActionTiming.After)
     {
+        _fadeImage.enabled = true;
         EndFadeEvent().Forget();
+        CenterFadeEvent().Forget();
         
         _isFade = false;
 
@@ -131,18 +152,37 @@ public class Fader
         return this;
     }
 
+    public Fader AddCenterFadeEvent(Action action)
+    {
+        _fadeCenterAction += action;
+        return this;
+    }
+
+    async UniTask CenterFadeEvent()
+    {
+        float waitTime = DurationTime / 2;
+        await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
+
+        _fadeCenterAction?.Invoke();
+        _fadeCenterAction = null;
+    }
+
     public Fader AddEndFadeEvent(Action action)
     {
-        _action += action;
+        _fadeEndAction += action;
         return this;
     }
 
     async UniTask EndFadeEvent()
     {
         await UniTask.WaitUntil(() => _isFade);
-        _action?.Invoke();
-        _action = null;
+        _fadeEndAction?.Invoke();
+        _fadeEndAction = null;
     }
 
-    void EndFade() => _isFade = true;
+    void EndFade()
+    {
+        _fadeImage.enabled = false;
+        _isFade = true;
+    }
 }

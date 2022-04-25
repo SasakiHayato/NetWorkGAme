@@ -80,7 +80,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void Opning()
     {
-        _fader.SetFade(Fader.FadeType.In);
+        _fader.SetFade(Fader.FadeType.In, () => _fader.SetImageSouce(GamePresenter.FadeSprite));
+
+        GamePresenter.ChangeBackGround(CurrentGameState);
         SoundsManager.Request("TitleBGM");
     }
 
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 }
 
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Game"), Fader.ActionTiming.Center)
+                    .AddCenterFadeEvent(() => GamePresenter.ChangeBackGround(CurrentGameState))
                     .AddEndFadeEvent(GamePresenter.CountDown);
                 
                 break;
@@ -128,6 +131,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
             case (byte)GameSate.Result:
                 _fader.Slide(() => BaseUI.Instance.AtParantActive("Result"), Fader.ActionTiming.Center)
                     .AddEndFadeEvent(() => BaseUI.Instance.CallBack("Result", "ResultAnimation", new object[] { false }))
+                    .AddCenterFadeEvent(() => GamePresenter.ChangeBackGround(CurrentGameState))
                     .AddEndFadeEvent(() => ResultData.Judge());
                 
                 ResultData.SetMyData();
@@ -149,6 +153,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     PhotonNetwork.Disconnect();
                 }
 
+                GamePresenter.ChangeBackGround(CurrentGameState);
                 BaseUI.Instance.CallBackParent("Result");
                 BaseUI.Instance.AtParantActive("Title");
                 SoundsManager.Request("TitleBGM");
