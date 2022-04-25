@@ -79,7 +79,7 @@ public class NotesResponsible
             else
             {
                 _notesDatas.OrderBy(n => n.Dist);
-                return _notesDatas.First();
+                return _notesDatas[0];
             }
         }
     }

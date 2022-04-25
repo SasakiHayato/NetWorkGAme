@@ -16,7 +16,7 @@ public enum GameSate : byte
 
 public enum GameType
 {
-    Soro,
+    Solo,
     Multi,
 }
 
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
             case (byte)GameSate.Start:
                 SoundsManager.StopBGM();
 
-                if (CurrentGameType == GameType.Soro)
+                if (CurrentGameType == GameType.Solo)
                 {
                     IsUsingBot = true;
 

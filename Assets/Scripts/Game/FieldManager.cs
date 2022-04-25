@@ -52,7 +52,10 @@ public class FieldManager : MonoBehaviour, IManager
         CreateNotes();
         _notesResponsible.NotesUpDate();
 
-        if (_notesJudgement.UpDateJudge()) _notesResponsible.Delete();
+        if (_notesJudgement.UpDateJudge())
+        {
+            _notesResponsible.Delete();
+        }
     }
 
     void GameTime()

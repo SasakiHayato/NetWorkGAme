@@ -33,7 +33,7 @@ public class StartButtons : MonoBehaviour
 
     void Soro()
     {
-        GameManager.Instance.SetGameType(GameType.Soro);
+        GameManager.Instance.SetGameType(GameType.Solo);
 
         EventData eventData = new EventData();
         eventData.Code = (byte)GameSate.Start;
