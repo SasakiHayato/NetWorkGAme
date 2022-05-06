@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public NetworkManager NetworkManager { get; private set; }
     public GamePresenter GamePresenter { get; private set; }
     public ResultData ResultData { get; private set; }
+    public RankingManager RankingManager { get; private set; }
     public ItemManager ItemManager { get; private set; }
     public BotManager BotManager { get; private set; }
 
@@ -76,6 +77,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         GamePresenter = FindObjectOfType<GamePresenter>();
 
         _iManagerList = new List<IManager>();
+
+        GameObject rankingManager = Instantiate((GameObject)Resources.Load("Systems/RankingManager"));
+        RankingManager = rankingManager.GetComponent<RankingManager>();
+
+        _iManagerList.Add(RankingManager);
     }
 
     public void Opning()
@@ -139,6 +145,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     .AddEndFadeEvent(() => SoundsManager.Request("ResultBGM"));
                 
                 ResultData.SetMyData();
+                RankingManager.CallBackRankingData();
 
                 if (CurrentGameType == GameType.Multi)
                 {
@@ -151,6 +158,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 break;
 
             case (byte)GameSate.Title:
+
+                RankingManager.SetUp();
 
                 if (CurrentGameType == GameType.Multi)
                 {
@@ -226,7 +235,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         if (manager != null)
         {
             _iManagerList.Remove(manager);
-            Object.Destroy(manager.ManagerObject());
+            Destroy(manager.ManagerObject());
         }
     }
 }

@@ -7,8 +7,17 @@ using DG.Tweening;
 
 public class PanelAnimation : ChildrenUI
 {
-    [SerializeField] Vector2 _offSetPotision;
-    [SerializeField] Vector2 _setPositision;
+    enum AnimType
+    {
+        Move,
+        Scale,
+    }
+
+    [SerializeField] AnimType _animType = AnimType.Move;
+    [SerializeField] Vector2 _offSet;
+    [SerializeField] Vector2 _set;
+    
+    [SerializeField] Ease _ease = Ease.Linear;
 
     RectTransform _rect;
 
@@ -17,7 +26,7 @@ public class PanelAnimation : ChildrenUI
     public override void SetUp()
     {
         _rect = GetComponent<RectTransform>();
-        _rect.anchoredPosition = _offSetPotision;
+        _rect.anchoredPosition = _offSet;
     }
 
     public override void CallBack(object[] datas = null)
@@ -26,13 +35,29 @@ public class PanelAnimation : ChildrenUI
 
         if (isOpen)
         {
-            _rect.DOAnchorPos(_setPositision, DurationTime)
-                .SetEase(Ease.Linear);
+            if (_animType == AnimType.Move)
+            {
+                _rect.DOAnchorPos(_set, DurationTime)
+                .SetEase(_ease);
+            }
+            else
+            {
+                _rect.DOScale(_set, DurationTime)
+                    .SetEase(_ease);
+            }
         }
         else
         {
-            _rect.DOAnchorPos(_offSetPotision, DurationTime)
-                .SetEase(Ease.Linear);
+            if (_animType == AnimType.Move)
+            {
+                _rect.DOAnchorPos(_offSet, DurationTime)
+                .SetEase(_ease);
+            }
+            else
+            {
+                _rect.DOScale(_offSet, DurationTime)
+                    .SetEase(_ease);
+            }
         }
     }
 }
